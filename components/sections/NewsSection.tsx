@@ -77,90 +77,88 @@ export function NewsSection() {
   }, [emblaApi])
 
   return (
-    <section className="py-20 flex flex-col items-end justify-center bg-cream-100">
-      <div className="container w-full">
+    <section className="py-24">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Header con título y botones de navegación */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 pr-24">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-dark mb-4 md:mb-0 tracking-tight">
-            Noticias
-          </h2>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-20">
+          <div>
+            <h2 className="text-3xl md:text-6xl font-display font-medium text-dark tracking-tight">
+              Últimas Noticias
+            </h2>
+          </div>
           
           {/* Botones de navegación */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4 mt-6 md:mt-0">
             <button
               onClick={scrollPrev}
-              className="w-10 h-10 rounded-full bg-white shadow-md hover:shadow-lg flex items-center justify-center transition-all hover:scale-110 text-dark border border-neutral/20"
+              className="w-14 h-14 flex items-center justify-center border border-dark/20 hover:bg-dark hover:text-white transition-all duration-300"
               aria-label="Anterior"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               onClick={scrollNext}
-              className="w-10 h-10 rounded-full bg-white shadow-md hover:shadow-lg flex items-center justify-center transition-all hover:scale-110 text-dark border border-neutral/20"
+              className="w-14 h-14 flex items-center justify-center border border-dark/20 hover:bg-dark hover:text-white transition-all duration-300"
               aria-label="Siguiente"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
-            
-          <Link
+            <Link
             href="/noticias"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white text-dark rounded-xl font-display font-medium text-body-sm hover:bg-neutral transition-colors border border-neutral/20 shadow-sm hover:shadow-md group"
+            className="inline-flex items-center px-8 h-14 bg-dark text-white font-body font-semibold text-body tracking-wide hover:bg-accent transition-colors duration-300"
           >
-            Ver todas las noticias
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            Ver Todas las Noticias
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Link>
-        </div>
+          </div>
         </div>
 
         {/* Carrusel */}
-        <div className="overflow-hidden pb-6 mb-6" ref={emblaRef}>
-          <div className="flex">
+        <div className="overflow-hidden pb-10" ref={emblaRef}>
+          <div className="flex -ml-2">
             {news.map((item) => (
               <div
                 key={item.id}
-                className="flex-shrink-0 w-[300px] md:w-[320px] lg:w-[360px] mr-6"
+                className="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 pl-4"
               >
-                <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col">
-                  {/* Imagen con tag de categoría */}
-                  <Link href={`/noticias/${item.id}`} className="relative block">
-                    <div className="relative h-64 overflow-hidden">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover transition-transform duration-300 hover:scale-105"
-                      />
-                      {/* Tag de categoría en esquina superior derecha */}
-                      <div className="absolute top-3 right-3">
-                        <span className="inline-block px-3 py-1 text-xs font-display font-semibold uppercase tracking-wider text-white bg-accent/10 rounded-full backdrop-blur-sm">
-                          {item.category}
-                        </span>
-                      </div>
+                <div className="group h-full flex flex-col  border-transparent transition-all duration-300">
+                  {/* Imagen */}
+                  <Link href={`/noticias/${item.id}`} className="relative block overflow-hidden aspect-[1/1] [clip-path:polygon(0%_0%,_82%_0,_100%_18%,_100%_100%,_0%_100%)]">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-dark/20 group-hover:bg-dark/0 transition-colors duration-300" />
+                    
+                    {/* Fecha en la imagen */}
+                    <div className="absolute top-4 left-4 bg-white/40 backdrop-blur-sm px-3 py-1">
+                      <span className="text-xs font-body font-bold tracking-wider text-white uppercase">
+                        {item.date.split(' ').slice(0, 2).join(' ')}
+                      </span>
                     </div>
                   </Link>
 
                   {/* Contenido */}
-                  <div className="p-6 flex flex-col flex-grow">
-                    {/* Título clickeable */}
-                    <Link href={`/noticias/${item.id}`}>
-                      <h3 className="text-normal md:text-md font-display font-bold text-dark mb-3 leading-tight line-clamp-2 hover:text-accent transition-colors cursor-pointer">
+                  <div className="flex flex-col w-11/12 mt-[-60px] z-10 flex-grow bg-white border border-neutral-900 border-b-4 ">
+                    <span className="text-accent text-xs font-bold uppercase inline-block tracking-widest mb-3 px-6 pt-6">
+                      {item.category}
+                    </span>
+                    
+                    <Link href={`/noticias/${item.id}`} className="block mb-8 px-6">
+                      <h3 className="text-xl font-display font-medium text-dark leading-snug group-hover:text-accent transition-colors">
                         {item.title}
                       </h3>
                     </Link>
 
-                    {/* Fecha */}
-                    <div className="flex items-center text-body-sm text-slate-500 mb-4 font-body">
-                      {item.date}
-                    </div>
-
-                    {/* Botón Ver Noticia */}
-                    <div className="mt-4">
+                    <div className="mt-auto py-4 px-6 border-t border-neutral-100 flex items-center justify-between">
                       <Link
                         href={`/noticias/${item.id}`}
-                        className="inline-flex items-center justify-center w-full py-3 text-primary font-display font-medium text-body-sm hover:text-accent transition-colors group"
+                        className="inline-flex items-center text-sm font-body font-semibold text-dark hover:text-accent transition-colors group/link"
                       >
-                        Ver noticia
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        Leer más
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
                       </Link>
                     </div>
                   </div>
@@ -170,7 +168,14 @@ export function NewsSection() {
           </div>
         </div>
 
-        
+        {/* <div className="flex justify-center mt-8">
+          <Link
+            href="/noticias"
+            className="inline-flex items-center px-8 py-4 bg-dark text-white font-body font-medium text-sm tracking-wide hover:bg-accent transition-colors duration-300"
+          >
+            VER TODAS LAS NOTICIAS
+          </Link>
+        </div> */}
       </div>
     </section>
   )

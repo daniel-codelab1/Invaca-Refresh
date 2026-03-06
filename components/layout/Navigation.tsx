@@ -19,7 +19,7 @@ const navItems = [
 export function Navigation({ mobile = false }: NavigationProps) {
   const pathname = usePathname()
 
-  const baseLinkClasses = 'font-display font-medium transition-colors'
+  const baseLinkClasses = 'font-body uppercase tracking-wider font-bold transition-colors'
   const sizeClasses = mobile ? 'block py-2 text-base' : 'text-body-sm'
 
   return (
@@ -31,7 +31,7 @@ export function Navigation({ mobile = false }: NavigationProps) {
           baseLinkClasses,
           pathname === '/'
             ? 'text-accent'
-            : 'text-slate hover:text-accent',
+            : 'text-gray-700 hover:text-accent',
           sizeClasses
         )}
       >
@@ -53,7 +53,7 @@ export function Navigation({ mobile = false }: NavigationProps) {
             baseLinkClasses,
             pathname === item.href
               ? 'text-accent'
-              : 'text-slate hover:text-accent',
+              : 'text-gray-700 hover:text-accent',
             sizeClasses
           )}
         >

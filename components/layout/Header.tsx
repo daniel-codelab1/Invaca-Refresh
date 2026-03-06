@@ -11,34 +11,34 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-24 items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
               src="/logos/LogotipoInvacaColor.png"
               alt="INVACA Investment Company"
               width={160}
-              height={50}
-              className="h-14 md:h-16 w-auto object-contain"
+              height={60}
+              className="h-12 md:h-14 w-auto object-contain"
               priority
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-10">
             <Navigation />
           </nav>
 
           {/* Language Selector & CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <select className="text-body-sm font-body border-none bg-transparent cursor-pointer focus:outline-none">
+            {/* <select className="text-body-sm font-body border-none bg-transparent cursor-pointer focus:outline-none">
               <option value="es">ES</option>
               <option value="en">EN</option>
-            </select>
+            </select> */}
             <Link
               href="/contacto"
-              className="px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent-600 transition-colors"
+              className="px-4 py-2 bg-accent text-white rounded-sm uppercase text-body-sm font-body font-semibold hover:bg-accent-600 transition-colors"
             >
               Contacto
             </Link>
@@ -64,13 +64,13 @@ export function Header() {
             <nav className="flex flex-col space-y-4">
               <Navigation mobile />
               <div className="flex items-center justify-between pt-4 border-t">
-                <select className="text-body-sm font-body border border-gray-300 rounded px-2 py-1 rounded-lg">
+                {/* <select className="text-body-sm font-body border border-gray-300 rounded px-2 py-1 rounded-lg">
                   <option value="es">ES</option>
                   <option value="en">EN</option>
-                </select>
+                </select> */}
                 <Link
                   href="/contacto"
-                  className="px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent-600 transition-colors font-display font-medium text-body-sm"
+                  className="px-4 py-2 bg-accent text-white hover:bg-accent-600 transition-colors font-display font-medium text-body-sm"
                 >
                   Contacto
                 </Link>

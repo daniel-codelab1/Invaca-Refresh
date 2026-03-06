@@ -103,8 +103,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['var(--font-montserrat)', 'sans-serif'],
-        body: ['var(--font-inter)', 'sans-serif'],
+        display: ['var(--font-dm-serif)', 'sans-serif'],
+        body: ['var(--font-manrope)', 'sans-serif'],
       },
       fontSize: {
         'h1': ['3.5rem', { lineHeight: '1.1', fontWeight: '700' }],

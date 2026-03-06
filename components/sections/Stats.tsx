@@ -6,11 +6,11 @@ import { motion } from 'framer-motion'
 const stats = [
   {
     value: '100+',
-    label: ['Años de Actividad', 'Ininterrumpida'],
+    label: ['Años de actividad', 'ininterrumpida'],
   },
   {
     value: '3',
-    label: ['Centros Comerciales', 'en Operación'],
+    label: ['Centros comerciales', 'en operación'],
   },
   {
     value: '70+',
@@ -18,15 +18,15 @@ const stats = [
   },
   {
     value: 'IVC.A/B',
-    label: ['Cotización Bursátil en la', 'Bolsa de Valores de Caracas'],
+    label: ['Cotización bursátil en la', 'Bolsa de Valores de Caracas'],
   },
 ]
 
 export function Stats() {
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
+    <section className="">
+      <div className="">
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -36,9 +36,9 @@ export function Stats() {
           <h2 className="text-xl font-medium text-slate font-body mb-0">
             Nuestra trayectoria: Un siglo de liderazgo empresarial
           </h2>
-        </motion.div>
+        </motion.div> */}
 
-        <div className="flex flex-col md:flex-row w-full bg-cream-200/50 border-2 border-white rounded-2xl p-12 justify-center items-center">
+        <div className="bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center flex flex-col md:flex-row w-full bg-dark border-t-2 border-white/50 p-12 justify-center items-center rounded-sm">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
             {stats.map((stat, index) => (
               <motion.div
@@ -50,12 +50,12 @@ export function Stats() {
                 className="text-center p-4 px-5"
               >
                 {/* Value */}
-                <div className="text-6xl font-display font-bold text-dark mb-3 leading-none">
+                <div className="text-6xl font-body font-bold text-white mb-4 leading-none">
                   {stat.value}
                 </div>
 
                 {/* Label */}
-                <div className="text-sm text-slate font-body font-normal leading-normal">
+                <div className="text-sm text-white/70 font-body font-normal leading-normal">
                   {Array.isArray(stat.label) ? (
                     <>
                       {stat.label.map((line, i) => (

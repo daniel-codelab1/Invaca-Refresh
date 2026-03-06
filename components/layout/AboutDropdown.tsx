@@ -11,14 +11,14 @@ const dropdownItems = [
   {
     href: '/nosotros',
     label: 'Quiénes Somos',
-    previewImage: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop',
+    previewImage: '/images/assets/saman-ivc-1.jpg',
     previewTitle: 'Quiénes Somos',
     previewDescription: 'Conoce nuestra historia y trayectoria de más de 100 años',
   },
   {
     href: '/nosotros/gobernanza',
     label: 'Gobernanza',
-    previewImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
+    previewImage: '/images/assets/gobernanza-2.jpg',
     previewTitle: 'Gobernanza',
     previewDescription: 'Estructura corporativa y principios de gobierno',
   },
@@ -45,7 +45,7 @@ export function AboutDropdown({ mobile = false }: AboutDropdownProps) {
           (item) => pathname === item.href || pathname.startsWith(item.href + '/')
         ) || dropdownItems[0]
 
-  const linkBase = 'font-display font-medium transition-colors'
+  const linkBase = 'font-body uppercase font-bold tracking-wider transition-colors'
   const sizeClasses = mobile ? 'block py-2 text-base' : 'text-body-sm'
 
   const handleMouseEnter = () => {
@@ -96,13 +96,13 @@ export function AboutDropdown({ mobile = false }: AboutDropdownProps) {
             style={{ pointerEvents: 'auto' }}
           />
           <div
-            className="fixed top-24 left-1/2 -translate-x-1/2 w-[800px] max-w-[calc(100vw-2rem)] bg-white shadow-2xl border border-neutral/20 z-50 rounded-b-2xl overflow-hidden"
+            className="fixed top-20 left-1/2 -translate-x-1/2 w-[800px] max-w-[calc(100vw-2rem)] bg-white shadow-2xl border border-neutral/20 z-50 overflow-hidden"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-5">
             {/* Left Column - Navigation Links */}
-            <div className="bg-neutral border-r border-neutral/20 px-8 py-10">
+            <div className="bg-neutral border-r border-neutral/20 px-8 py-8 col-span-2">
               <div className="space-y-1">
                 {dropdownItems.map((item, index) => {
                   const itemIsActive = pathname === item.href || pathname.startsWith(item.href + '/')
@@ -115,13 +115,13 @@ export function AboutDropdown({ mobile = false }: AboutDropdownProps) {
                       onClick={() => setIsOpen(false)}
                       className={cn(
                         'block py-3 transition-all duration-300',
-                        isHovered || itemIsActive ? 'border-b-2 border-dark' : 'border-b border-transparent'
+                        isHovered || itemIsActive ? 'border-b border-dark' : 'border-b border-transparent'
                       )}
                     >
                       <div className="flex items-center justify-between group">
                         <span
                           className={cn(
-                            'text-base font-display font-bold uppercase tracking-wide transition-colors',
+                            'text-base font-body font-bold uppercase tracking-wide transition-colors',
                             isHovered || itemIsActive ? 'text-dark' : 'text-slate'
                           )}
                         >
@@ -137,9 +137,9 @@ export function AboutDropdown({ mobile = false }: AboutDropdownProps) {
               </div>
             </div>
             {/* Right Column - Preview */}
-            <div className="px-8 py-10 flex flex-col">
+            <div className="px-8 py-8 flex flex-col col-span-3">
               {/* Image */}
-              <div className="relative w-full h-[180px] mb-4 overflow-hidden rounded-lg">
+              <div className="relative w-full h-[180px] mb-4 rounded-sm overflow-hidden">
                 <Image
                   src={currentPreview.previewImage}
                   alt={currentPreview.previewTitle}
@@ -149,18 +149,18 @@ export function AboutDropdown({ mobile = false }: AboutDropdownProps) {
                 />
               </div>
               {/* Title */}
-              <h3 className="text-xl font-display font-bold mb-2 uppercase tracking-wide text-dark">
+              <h3 className="text-lg font-body font-bold mb-2 uppercase tracking-wide text-dark">
                 {currentPreview.previewTitle}
               </h3>
               {/* Description */}
-              <p className="text-body-sm font-body mb-4 text-slate">
+              <p className="text-body-sm font-body mb-6 text-slate">
                 {currentPreview.previewDescription}
               </p>
               {/* Link */}
               <Link
                 href={currentPreview.href}
                 onClick={() => setIsOpen(false)}
-                className="inline-flex items-center text-body-sm font-display font-medium uppercase tracking-wider text-accent hover:text-accent-600 transition-colors group self-start"
+                className="inline-flex items-center text-body-sm font-body font-semibold uppercase tracking-wider text-accent hover:text-accent-600 transition-colors group self-start"
               >
                 Saber más
                 <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />

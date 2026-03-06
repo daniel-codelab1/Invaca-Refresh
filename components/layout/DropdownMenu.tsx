@@ -11,21 +11,21 @@ const dropdownItems = [
   {
     href: '/centros-comerciales',
     label: 'Centros Comerciales',
-    previewImage: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop',
+    previewImage: '/images/malls/collage-udn.jpg',
     previewTitle: 'Centros Comerciales',
     previewDescription: 'Descubre nuestros centros comerciales de alta gama',
   },
   {
     href: '/estacionamientos',
     label: 'Estacionamientos',
-    previewImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop',
+    previewImage: '/images/malls/ccllanomall/parking-llanomall.jpg',
     previewTitle: 'Estacionamientos',
     previewDescription: 'Servicios de estacionamiento estratégicamente ubicados',
   },
   {
     href: '/otros-activos',
     label: 'Otros Activos',
-    previewImage: 'https://images.unsplash.com/photo-1555529669-2269763671c0?w=800&h=600&fit=crop',
+    previewImage: '/images/other-assets/torre-provincial.jpg',
     previewTitle: 'Otros Activos',
     previewDescription: 'Explora nuestro portafolio diversificado de activos inmobiliarios',
   },
@@ -68,12 +68,12 @@ export function DropdownMenu() {
     >
       <span
         className={cn(
-          'inline-flex items-center gap-1 font-display font-medium transition-colors cursor-pointer',
-          isActive ? 'text-accent' : 'text-slate hover:text-accent',
+          'inline-flex items-center uppercase gap-1 font-body font-bold tracking-wider transition-colors cursor-pointer',
+          isActive ? 'text-accent' : 'text-gray-700 hover:text-accent',
           'text-body-sm'
         )}
       >
-        Nuestra Oferta
+        Nuestros Activos
         <ChevronDown className={cn(
           'h-4 w-4 transition-transform duration-200',
           isOpen && 'rotate-180'
@@ -88,13 +88,13 @@ export function DropdownMenu() {
             style={{ pointerEvents: 'auto' }}
           />
           <div
-            className="fixed top-24 left-1/2 -translate-x-1/2 w-[800px] max-w-[calc(100vw-2rem)] bg-white shadow-2xl border border-neutral/20 rounded-b-2xl z-50 overflow-hidden"
+            className="fixed top-20 left-1/2 -translate-x-1/2 w-[800px] max-w-[calc(100vw-2rem)] bg-white shadow-2xl border border-neutral/20 z-50 overflow-hidden"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-5">
             {/* Left Column - Navigation Links */}
-            <div className="bg-neutral border-r border-neutral/20 px-8 py-10">
+            <div className="bg-neutral border-r border-neutral/20 px-8 py-8 col-span-2">
               <div className="space-y-1">
                 {dropdownItems.map((item, index) => {
                   const itemIsActive = pathname === item.href || pathname.startsWith(item.href + '/')
@@ -107,13 +107,13 @@ export function DropdownMenu() {
                       onClick={() => setIsOpen(false)}
                       className={cn(
                         'block py-3 transition-all duration-300',
-                        isHovered || itemIsActive ? 'border-b-2 border-dark' : 'border-b border-transparent'
+                        isHovered || itemIsActive ? 'border-b border-dark' : 'border-b border-transparent'
                       )}
                     >
                       <div className="flex items-center justify-between group">
                         <span
                           className={cn(
-                            'text-base font-display font-bold uppercase tracking-wide transition-colors',
+                            'text-base font-body font-bold uppercase tracking-wider transition-colors',
                             isHovered || itemIsActive ? 'text-dark' : 'text-slate'
                           )}
                         >
@@ -129,9 +129,9 @@ export function DropdownMenu() {
               </div>
             </div>
             {/* Right Column - Preview */}
-            <div className="px-8 py-10 flex flex-col">
+            <div className="px-8 py-8 flex flex-col col-span-3">
               {/* Image */}
-              <div className="relative w-full h-[180px] mb-4 overflow-hidden rounded-lg">
+              <div className="relative w-full h-[180px] mb-4 rounded-sm overflow-hidden">
                 <Image
                   src={currentPreview.previewImage}
                   alt={currentPreview.previewTitle}
@@ -141,18 +141,18 @@ export function DropdownMenu() {
                 />
               </div>
               {/* Title */}
-              <h3 className="text-xl font-display font-bold mb-2 uppercase tracking-wide text-dark">
+              <h3 className="text-lg font-body font-bold mb-2 uppercase tracking-wide text-dark">
                 {currentPreview.previewTitle}
               </h3>
               {/* Description */}
-              <p className="text-body-sm font-body mb-4 text-slate">
+              <p className="text-body-sm font-body mb-6 text-slate">
                 {currentPreview.previewDescription}
               </p>
               {/* Link */}
               <Link
                 href={currentPreview.href}
                 onClick={() => setIsOpen(false)}
-                className="inline-flex items-center text-body-sm font-display font-medium uppercase tracking-wider text-accent hover:text-accent-600 transition-colors group self-start"
+                className="inline-flex items-center text-body-sm font-body font-semibold uppercase tracking-wider text-accent hover:text-accent-600 transition-colors group self-start"
               >
                 Saber más
                 <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />

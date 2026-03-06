@@ -11,14 +11,14 @@ const heroSlides = [
     id: 1,
     image: '/images/hero/avila-landscape-home.jpg',
     title: 'Más de 100 Años Construyendo el Futuro Inmobiliario',
-    subtitle: 'Un siglo de liderazgo, tradición e innovación empresarial. Desde 1925, combinando tradición con visión futurista para construir una trayectoria de éxito.',
+    subtitle: 'Un siglo de inversión, tradición e innovación empresarial. Desde 1925, combinando tradición con visión futurista para construir una trayectoria de éxito.',
     ctaText: 'Descubre Nuestros Proyectos',
     ctaLink: '/centros-comerciales',
   },
   {
     id: 2,
     image: '/images/hero/FVI-2321.jpg',
-    title: 'Tolón Fashion Mall, Paseo El Hatillo y Llano Mall',
+    title: 'Tolón, Paseo El Hatillo y Llano Mall',
     subtitle: 'Centros comerciales de alta gama que transforman la experiencia de compra y entretenimiento en Venezuela',
     ctaText: 'Explorar Centros Comerciales',
     ctaLink: '/centros-comerciales',
@@ -26,8 +26,8 @@ const heroSlides = [
   {
     id: 3,
     image: '/images/hero/avila-landscape-new-2.jpg',
-    title: 'INVACA Investment Company',
-    subtitle: 'Líderes en inversión inmobiliaria y financiera en Venezuela desde 1955',
+    title: 'Invaca Investment Company',
+    subtitle: 'Expertos en inversión inmobiliaria y financiera en Venezuela desde 1955',
     ctaText: 'Conoce más sobre Invaca',
     ctaLink: '/nosotros',
   },
@@ -81,8 +81,8 @@ export function Hero() {
   }
 
   return (
-    <section className="relative w-full p-4 h-[90vh] min-h-[700px]">
-      <div className="relative w-full h-full overflow-hidden rounded-2xl">
+    <section className="relative w-full h-[91vh] min-h-[700px]">
+      <div className="relative w-full h-full overflow-hidden">
         {/* Background Images with Transitions */}
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
@@ -118,9 +118,9 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className="max-w-4xl"
+            className="max-w-5xl"
           >
-            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-white mb-6 leading-tight tracking-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-display text-white mb-6 leading-normal tracking-tight">
               {currentHero.title}
             </h1>
             <p className="text-base md:text-base lg:text-lg xl:text-xl text-white max-w-3xl mx-auto font-body leading-relaxed">
@@ -129,7 +129,7 @@ export function Hero() {
             <div className="mt-8 flex justify-center">
               <Link
                 href={currentHero.ctaLink}
-                className="inline-flex items-center px-8 py-4 bg-accent text-white rounded-full font-display font-semibold text-body hover:bg-accent-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-8 py-4 bg-accent text-white rounded-sm font-body font-semibold text-body hover:bg-accent-600 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 {currentHero.ctaText}
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -138,13 +138,13 @@ export function Hero() {
           </motion.div>
 
           {/* Info Elements - Bottom Left */}
-          <div className="absolute bottom-8 left-8 text-white/80 text-body-sm font-body">
+          <div className="absolute bottom-12 left-12 text-white/80 text-body-sm font-body">
             <p>Cotizando desde 1955 en la</p>
             <p>Bolsa de Valores de Caracas</p>
           </div>
 
           {/* Social Links - Bottom Right */}
-          <div className="absolute bottom-8 right-8 flex flex-row gap-6">
+          <div className="absolute bottom-12 right-12 flex flex-row gap-6">
             <a
               href="#"
               className="flex items-center text-body-sm text-white hover:text-sky transition-colors font-body"

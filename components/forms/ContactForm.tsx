@@ -56,87 +56,99 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="max-w-2xl mx-auto">
-      <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+      <div className="bg-white rounded-lg shadow-xl border border-slate-100 p-8 md:p-12 hover:shadow-2xl transition-shadow duration-500 relative overflow-hidden group">
+        
+        {/* Subtle decorative top border for visual balance with the left panel */}
+        <div className="absolute top-0 right-0 left-0 h-1 bg-gradient-to-r from-accent to-accent-600 opacity-50" />
+
+        <h3 className="text-2xl font-display font-medium text-dark mb-8">Envíanos un mensaje</h3>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <label htmlFor="name" className="block text-body-sm font-body font-medium text-slate mb-2">
+          <div className="group/input">
+            <label htmlFor="name" className="block text-xs font-bold tracking-wider uppercase text-slate-500 mb-2 transition-colors group-hover/input:text-accent">
               Nombre completo
             </label>
             <input
               type="text"
               id="name"
               {...register('name')}
-              className="w-full px-4 py-3 border border-slate/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent font-body"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-all duration-300 font-body placeholder-slate-300"
+              placeholder="Ej. Juan Pérez"
             />
             {errors.name && (
-              <p className="mt-1 text-body-xs text-accent font-body">{errors.name.message}</p>
+              <p className="mt-1 text-xs text-red-500 font-body">{errors.name.message}</p>
             )}
           </div>
 
-          <div>
-            <label htmlFor="email" className="block text-body-sm font-body font-medium text-slate mb-2">
+          <div className="group/input">
+            <label htmlFor="email" className="block text-xs font-bold tracking-wider uppercase text-slate-500 mb-2 transition-colors group-hover/input:text-accent">
               Email
             </label>
             <input
               type="email"
               id="email"
               {...register('email')}
-              className="w-full px-4 py-3 border border-slate/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent font-body"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-all duration-300 font-body placeholder-slate-300"
+              placeholder="correo@ejemplo.com"
             />
             {errors.email && (
-              <p className="mt-1 text-body-xs text-accent font-body">{errors.email.message}</p>
+              <p className="mt-1 text-xs text-red-500 font-body">{errors.email.message}</p>
             )}
           </div>
         </div>
 
-        <div className="mb-6">
-          <label htmlFor="phone" className="block text-body-sm font-body font-medium text-slate mb-2">
+        <div className="mb-6 group/input">
+          <label htmlFor="phone" className="block text-xs font-bold tracking-wider uppercase text-slate-500 mb-2 transition-colors group-hover/input:text-accent">
             Teléfono (opcional)
           </label>
           <input
             type="tel"
             id="phone"
             {...register('phone')}
-            className="w-full px-4 py-3 border border-slate/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent font-body"
+            className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-all duration-300 font-body placeholder-slate-300"
+            placeholder="+58 (000) 000-0000"
           />
         </div>
 
-        <div className="mb-6">
-          <label htmlFor="subject" className="block text-body-sm font-body font-medium text-slate mb-2">
+        <div className="mb-6 group/input">
+          <label htmlFor="subject" className="block text-xs font-bold tracking-wider uppercase text-slate-500 mb-2 transition-colors group-hover/input:text-accent">
             Asunto
           </label>
           <input
             type="text"
             id="subject"
             {...register('subject')}
-            className="w-full px-4 py-3 border border-slate/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent font-body"
+            className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-all duration-300 font-body placeholder-slate-300"
+            placeholder="¿En qué podemos ayudarle?"
           />
           {errors.subject && (
-            <p className="mt-1 text-body-xs text-accent font-body">{errors.subject.message}</p>
+            <p className="mt-1 text-xs text-red-500 font-body">{errors.subject.message}</p>
           )}
         </div>
 
-        <div className="mb-8">
-          <label htmlFor="message" className="block text-body-sm font-body font-medium text-slate mb-2">
+        <div className="mb-8 group/input">
+          <label htmlFor="message" className="block text-xs font-bold tracking-wider uppercase text-slate-500 mb-2 transition-colors group-hover/input:text-accent">
             Mensaje
           </label>
           <textarea
             id="message"
-            rows={6}
+            rows={5}
             {...register('message')}
-            className="w-full px-4 py-3 border border-slate/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent font-body resize-none"
+            className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:bg-white transition-all duration-300 font-body resize-none placeholder-slate-300"
+            placeholder="Escriba su mensaje aquí..."
           />
           {errors.message && (
-            <p className="mt-1 text-body-xs text-accent font-body">{errors.message.message}</p>
+            <p className="mt-1 text-xs text-red-500 font-body">{errors.message.message}</p>
           )}
         </div>
 
         <button
           type="submit"
-          className="w-full px-8 py-4 bg-accent text-white rounded-xl font-display font-semibold text-body hover:bg-accent-600 transition-all duration-300 shadow-md hover:shadow-lg"
+          className="w-full px-8 py-4 bg-dark text-white rounded-md font-display font-medium text-lg hover:bg-accent transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 relative overflow-hidden group/btn"
         >
-          Enviar Mensaje
+          <span className="relative z-10">Enviar Mensaje</span>
+          <div className="absolute inset-0 bg-accent scale-x-0 group-hover/btn:scale-x-100 origin-left transition-transform duration-500 ease-out z-0" />
         </button>
       </div>
     </form>
