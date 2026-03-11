@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_mall_details_performances",
+  "info": {
+    "displayName": "Performance"
+  },
+  "options": {},
+  "attributes": {
+    "AnnualVisitors": {
+      "type": "string"
+    },
+    "OpeningYear": {
+      "type": "string"
+    },
+    "SocialFollowers": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

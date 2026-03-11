@@ -4,41 +4,42 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, MapPin } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { getStrapiMedia, STRAPI_BASE_URL } from '@/lib/tools'
 
-const featuredMalls = [
-  {
-    id: 1,
-    name: 'Tolón Fashion Mall',
-    slug: 'tolon-fashion-mall',
-    location: 'Las Mercedes, Caracas, Venezuela',
-    image: '/images/malls/tolon/fachada-tolon-1.jpg',
-    stores: 150,
-    restaurants: 25,
-    parkingSpots: 500,
-  },
-  {
-    id: 2,
-    name: 'Paseo El Hatillo',
-    slug: 'paseo-el-hatillo',
-    location: 'El Hatillo, Caracas, Venezuela',
-    image: '/images/malls/paseoelhatillo/4938623117048261886.jpg',
-    stores: 120,
-    restaurants: 30,
-    parkingSpots: 400,
-  },
-  {
-    id: 3,
-    name: 'Llano Mall Ciudad Comercial',
-    slug: 'llano-mall-ciudad-comercial',
-    location: 'Acarigua, Portuguesa, Venezuela',
-    image: '/images/malls/ccllanomall/8826667.jpg',
-    stores: 200,
-    restaurants: 35,
-    parkingSpots: 600,
-  },
-]
+interface FeaturedMallType {
+  id: number;
+  name: string;
+  slug: string;
+  location: string;
+  image: string;
+  stores: number | string;
+  restaurants: number | string;
+  parkingSpots: number | string;
+}
 
 export function FeaturedMalls() {
+  const [featuredMalls, setFeaturedMalls] = useState<FeaturedMallType[]>([])
+
+  useEffect(() => {
+    getStrapiMedia('/api/malls?populate[0]=MainImage&populate[1]=Stats').then((res) => {
+      if (res && res.data) {
+        const mapped = res.data.map((mall: any) => ({
+          id: mall.id,
+          name: mall.Name,
+          slug: mall.Slug,
+          location: mall.Location,
+          image: mall.MainImage?.url ? `${STRAPI_BASE_URL}${mall.MainImage.url}` : '/images/assets/bg-ivc-4.jpg',
+          stores: mall.Stats?.Stores || 0,
+          restaurants: mall.Stats?.Restaurants || 0,
+          parkingSpots: mall.Stats?.ParkingSpots || 0
+        }))
+        setFeaturedMalls(mapped)
+        console.log(mapped)
+      }
+    })
+  }, [])
+
   return (
     <section className="pt-32 pb-36">
       <div className="container mx-auto px-4 sm:px-6">
@@ -105,6 +106,7 @@ export function FeaturedMalls() {
                       src={mall.image}
                       alt={mall.name}
                       fill
+                      unoptimized
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </motion.div>

@@ -64,7 +64,7 @@ export function ContactClient() {
       {/* 1. Hero with True Parallax */}
       <section
         ref={heroRef}
-        className="relative h-[70vh] md:h-[80vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden p-4"
+        className="relative h-[70vh] md:h-[80vh] min-h-[470px] w-full flex items-center justify-center overflow-hidden p-4"
       >
         <motion.div className="absolute inset-0 z-0 bg-dark" style={{ y: heroY }}>
           <Image
@@ -109,7 +109,7 @@ export function ContactClient() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-100px' }}
-            className="flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto"
+            className="flex flex-col lg:flex-row gap-10 mx-auto"
           >
             {/* Left Column: Address + Department Cards */}
             <motion.div variants={fadeUpVariant} className="w-full lg:w-6/12 flex flex-col gap-6">
@@ -173,8 +173,8 @@ export function ContactClient() {
 
             {/* Right Column: Google Maps */}
             <motion.div variants={fadeUpVariant} className="w-full lg:w-6/12">
-              <div className="bg-white relative overflow-hidden h-full min-h-[500px] lg:min-h-0 group">
-                <div className="relative w-full h-[600px]">
+              <div className="bg-white relative overflow-hidden h-full min-h-[480px] lg:min-h-0 group">
+                <div className="relative w-full h-[480px]">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.5899963597434!2d-66.85912992476693!3d10.492158789670518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a593b0c614f63%3A0x2b3265c76f8e7e62!2sTorre%20El%20Sam%C3%A1n!5e0!3m2!1ses!2sve!4v1709650000000!5m2!1ses!2sve"
                     width="100%"

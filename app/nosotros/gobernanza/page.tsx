@@ -2,7 +2,8 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { getStrapiMedia, STRAPI_BASE_URL } from "@/lib/tools";
 
 interface TeamMember {
   id: string;
@@ -11,78 +12,37 @@ interface TeamMember {
   image: string;
 }
 
-const introText =
-  "Invaca Investment Company mantiene los más altos estándares de gobierno corporativo, transparencia y responsabilidad. Nuestra estructura está diseñada para garantizar decisiones estratégicas que beneficien a todos nuestros stakeholders.";
-
 export default function GobernanzaPage() {
-  const teamMembers: TeamMember[] = [
-    {
-      id: "member-1",
-      name: "Luis Carlos Serra Carmona",
-      title: "Presidente",
-      image: "/images/assets/geom-2.jpg",
-    },
-    {
-      id: "member-2",
-      name: "Gabriel Roig",
-      title: "VP Ejecutivo",
-      image: "/images/assets/bg-ivc-4.jpg",
-    },
-    {
-      id: "member-3",
-      name: "Alfredo Sayegh",
-      title: "VP Operaciones",
-      image: "/images/assets/saman-ivc-1.jpg",
-    },
-    {
-      id: "member-4",
-      name: "Flavia D'Ascoli",
-      title: "VP Consultoría Jurídica",
-      image: "/images/assets/geometric-bg-2.jpg",
-    },
-    {
-      id: "member-5",
-      name: "Maria Andrade",
-      title: "VP Comercialización",
-      image: "/images/assets/bg-ivc-3.jpg",
-    },
-    {
-      id: "member-6",
-      name: "Rina Morillo",
-      title: "VP Comunicaciones",
-      image: "/images/assets/geometric-bg.jpg",
-    },
-    {
-      id: "member-7",
-      name: "Leyssand Lobo",
-      title: "VP Presupuesto",
-      image: "/images/assets/geom-2.jpg",
-    },
-    {
-      id: "member-8",
-      name: "Elsy Diaz",
-      title: "Gte. de Finanzas Corporativas",
-      image: "/images/assets/saman-ivc-1.jpg",
-    },
-    {
-      id: "member-9",
-      name: "Roisi Franquiz",
-      title: "Gte. de Impuestos",
-      image: "/images/assets/geometric-bg-2.jpg",
-    },
-    {
-      id: "member-10",
-      name: "Emmanuel Pineda",
-      title: "Gte. de Sistemas/IA",
-      image: "/images/assets/bg-ivc-3.jpg",
-    },
-    {
-      id: "member-11",
-      name: "Valentina Conde",
-      title: "Gte. de Proyectos",
-      image: "/images/assets/geometric-bg.jpg",
-    },
-  ];
+  const [introText, setIntroText] = useState(
+    "Invaca Investment Company mantiene los más altos estándares de gobierno corporativo, transparencia y responsabilidad. Nuestra estructura está diseñada para garantizar decisiones estratégicas que beneficien a todos nuestros stakeholders."
+  );
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+
+  useEffect(() => {
+    getStrapiMedia('/api/governance?populate=Members.Image').then((strapiData) => {
+      if (strapiData?.data) {
+        if (strapiData.data.Statement) {
+          setIntroText(strapiData.data.Statement);
+        }
+        
+        if (strapiData.data.Members) {
+          const mappedMembers = strapiData.data.Members.map((member: any) => {
+            const imageUrl = member.Image?.url 
+              ? `${STRAPI_BASE_URL}${member.Image.url}` 
+              : '/images/assets/geometric-bg.jpg';
+              
+            return {
+              id: member.id?.toString() || Math.random().toString(),
+              name: member.Name || '',
+              title: member.Title || '',
+              image: imageUrl,
+            };
+          });
+          setTeamMembers(mappedMembers);
+        }
+      }
+    });
+  }, []);
 
   // Parallax Setup for Hero
   const heroRef = useRef(null);
@@ -181,7 +141,7 @@ export default function GobernanzaPage() {
 
       {/* Corporate Team Grid */}
       <section className="py-20 lg:py-28 pb-40">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto px-4 sm:px-8 lg:px-24">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -204,7 +164,7 @@ export default function GobernanzaPage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-10%" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-12 max-w-7xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-12 mx-auto"
           >
             {teamMembers.map((member) => (
               <motion.div
@@ -219,18 +179,16 @@ export default function GobernanzaPage() {
                   className="relative w-full aspect-[4/5] mb-6 overflow-hidden rounded-xs bg-neutral-200 cursor-pointer transition-all duration-500"
                 >
                   {/* Elegant decorative border */}
-                  <div className="absolute inset-0 border-[1px] border-dark/10 z-20 pointer-events-none transition-all duration-500 group-hover:border-accent/40 group-hover:inset-3" />
+                  <div className="absolute inset-0 border-[1px] border-dark/0 z-20 pointer-events-none transition-all duration-500 group-hover:border-accent/40 group-hover:inset-3" />
 
                   <Image
-                    src={member.image}
+                    src={member.image || '/images/assets/geometric-bg.jpg'}
                     alt={member.name}
                     fill
+                    unoptimized
                     className="object-cover transition-all duration-1000 group-hover:scale-110"
                   />
 
-                  {/* Subtle Gradient Overlay */}
-                  <div className="absolute inset-0 bg-dark/20 transition-colors duration-500 group-hover:bg-transparent z-10" />
-                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-dark/60 via-dark/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 z-10" />
                 </motion.div>
 
                 {/* Text Content */}

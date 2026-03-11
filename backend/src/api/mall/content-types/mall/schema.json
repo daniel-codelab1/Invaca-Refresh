@@ -1,0 +1,105 @@
+{
+  "kind": "collectionType",
+  "collectionName": "malls",
+  "info": {
+    "singularName": "mall",
+    "pluralName": "malls",
+    "displayName": "Mall"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Slug": {
+      "type": "uid"
+    },
+    "Location": {
+      "type": "string"
+    },
+    "Address": {
+      "type": "text"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "HeroVideo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "MainImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "SecondaryImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "CommercialArea": {
+      "type": "string"
+    },
+    "MapEmbedUrl": {
+      "type": "text"
+    },
+    "Gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Brands": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::brand.brand",
+      "mappedBy": "Malls"
+    },
+    "Stats": {
+      "type": "component",
+      "component": "mall-details.stats",
+      "repeatable": false
+    },
+    "Managers": {
+      "type": "component",
+      "component": "mall-details.manager",
+      "repeatable": true
+    },
+    "Performance": {
+      "type": "component",
+      "component": "mall-details.performance",
+      "repeatable": false
+    },
+    "Contact": {
+      "type": "component",
+      "component": "mall-details.contact",
+      "repeatable": false
+    }
+  }
+}

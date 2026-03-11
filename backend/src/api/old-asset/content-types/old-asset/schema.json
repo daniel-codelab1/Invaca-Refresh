@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "old_assets",
+  "info": {
+    "singularName": "old-asset",
+    "pluralName": "old-assets",
+    "displayName": "Old Asset"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Type": {
+      "type": "string"
+    },
+    "Location": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

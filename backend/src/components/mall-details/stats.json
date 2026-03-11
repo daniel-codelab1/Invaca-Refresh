@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_mall_details_stats",
+  "info": {
+    "displayName": "Stats"
+  },
+  "options": {},
+  "attributes": {
+    "Stores": {
+      "type": "integer"
+    },
+    "Restaurants": {
+      "type": "integer"
+    },
+    "ParkingSpots": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}

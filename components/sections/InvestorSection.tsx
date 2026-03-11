@@ -3,28 +3,12 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FileDown, Calendar, Clock, ArrowRight } from 'lucide-react'
 import TradingViewWidget from '../investors/TradingViewWidget'
 import TradingViewWidgetB from '../investors/TradingViewWidgetB'
+import { getStrapiMedia, STRAPI_BASE_URL } from '@/lib/tools'
 
-const financialReports = [
-  {
-    period: '2025-2024',
-    title: 'Estados financieros consolidados al 30 de junio 2025 y 2024 e informe de los contadores públicos independientes',
-    file: '/docs/estados-financieros-2024-2025.pdf',
-  },
-  {
-    period: '2024-2023',
-    title: 'Estados financieros consolidados al 30 de junio 2024 y 2023 e informe de los contadores públicos independientes',
-    file: '/docs/estados-financieros-2023-2024.pdf',
-  },
-  {
-    period: '2023-2022',
-    title: 'Estados financieros consolidados al 30 de junio 2023 y 2022 e informe de los contadores públicos independientes',
-    file: '/docs/estados-financieros-2022-2023.pdf',
-  },
-]
 
 const shareholderCalls = [
   {
@@ -70,6 +54,23 @@ const marketHouses = [
 
 export function InvestorSection() {
   const [activeTab, setActiveTab] = useState<'A' | 'B'>('A');
+  const [reports, setReports] = useState<any[]>([]);
+
+  useEffect(() => {
+    getStrapiMedia('/api/reports?populate=*').then((strapiData) => {
+      if (strapiData?.data) {
+        const mappedReports = strapiData.data.map((report: any) => {
+          const fileUrl = report.File?.url ? `${STRAPI_BASE_URL}${report.File.url}` : '';
+          return {
+            period: report.Period || '',
+            title: report.Title || '',
+            file: fileUrl,
+          };
+        });
+        setReports(mappedReports);
+      }
+    });
+  }, []);
 
   return (
     <section className="pt-36 pb-20">
@@ -158,54 +159,6 @@ export function InvestorSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-2 flex flex-col h-full gap-10"
           >
-            {/* Row 2: Convocatorias */}
-            {/* <div className="w-full lg:w-full h-full bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center rounded-sm p-6">
-              <h3 className="text-2xl lg:text-3xl font-display font-medium text-white mb-8">
-                Convocatoria para Accionistas
-              </h3>
-              
-              <div className="flex flex-col gap-4">
-                 {shareholderCalls.slice(0, 1).map((call, index) => (
-                  <div 
-                    key={index}
-                    className="p-5 border border-white bg-white rounded-sm transition-all"
-                  >
-                   <div className="flex flex-wrap gap-2 mb-4">
-                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-sm text-xs font-medium bg-slate-100 text-dark">
-                        {call.date !== 'Próximamente' ? (
-                          <>
-                            <Calendar className="w-3 h-3 mr-1" /> {call.date} - {call.time}
-                          </>
-                        ) : (
-                          <>
-                            <Calendar className="w-3 h-3 mr-1" /> {call.date}
-                          </>
-                        )}
-                     </span>
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-sm text-xs font-medium ${
-                        call.type === 'Ordinaria' ? 'bg-dark-800 text-white' : 'bg-accent-100 text-accent-800'
-                      }`}>
-                        {call.type}
-                     </span>
-                   </div>
-                   
-                   <h4 className="text-md font-body font-semibold text-dark mb-4 leading-snug">
-                     {call.title}
-                   </h4>
-                  
-                  {call.date !== 'Próximamente' && (
-                    <a 
-                      href={call.file}
-                      download
-                      className="inline-flex items-center font-body font-semibold text-body-sm text-accent hover:text-accent-600 transition-colors"
-                    >
-                      <FileDown className="h-4 w-4 mr-1.5" /> Descargar convocatoria
-                    </a>
-                  )}
-                  </div>
-                 ))}
-              </div>
-            </div> */}
 
             {/* Row 1: Estados Financieros */}
             <div className="sticky top-0">
@@ -216,7 +169,7 @@ export function InvestorSection() {
               </div>
               
               <div className="flex flex-row gap-3">
-                {financialReports.slice(0, 2).map((report, index) => (
+                {reports.slice(0, 2).map((report, index) => (
                   <div 
                     key={index}
                     className="relative flex flex-col items-start justify-between rounded-sm p-6 bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center border-b-2 border-dark-400 before:absolute before:bottom-[-2px] before:left-0 before:w-0 before:h-[2px] before:bg-accent-400 hover:before:w-full before:transition-all before:duration-500 before:ease-in-out group"
@@ -230,6 +183,8 @@ export function InvestorSection() {
                       download
                       className="py-2 px-4 text-body-sm font-body font-semibold flex items-center justify-center bg-white/10 text-white rounded-sm hover:bg-accent hover:text-white transition-colors"
                       title="Descargar PDF"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       {/* <FileDown className="h-5 w-5" /> */}
                       Descargar

@@ -14,8 +14,10 @@ export function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const article = getNewsBySlug(params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params
+  const decodedSlug = decodeURIComponent(resolvedParams.slug)
+  const article = getNewsBySlug(decodedSlug)
   
   if (!article) {
     return {
@@ -34,8 +36,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default function NewsDetailPage({ params }: { params: { slug: string } }) {
-  const article = getNewsBySlug(params.slug)
+export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params
+  const decodedSlug = decodeURIComponent(resolvedParams.slug)
+  const article = getNewsBySlug(decodedSlug)
 
   if (!article) {
     notFound()

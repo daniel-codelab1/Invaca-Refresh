@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "histories",
+  "info": {
+    "singularName": "history",
+    "pluralName": "histories",
+    "displayName": "History"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Statement": {
+      "type": "text"
+    },
+    "HistoryBlocks": {
+      "type": "component",
+      "component": "layout.history-blocks",
+      "repeatable": true
+    }
+  }
+}

@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { MapPin, ArrowRight, Store, Send } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { getStrapiMedia, STRAPI_BASE_URL } from '@/lib/tools'
 
 // Data can be passed as props or imported if it's static. For this refactor, we'll keep it self-contained to the client component for the grid logic.
 interface Mall {
@@ -16,37 +18,6 @@ interface Mall {
   stats: { stores: string, footfall: string }
 }
 
-const malls: Mall[] = [
-  {
-    id: 1,
-    name: 'Tolón Fashion Mall',
-    slug: 'tolon-fashion-mall',
-    location: 'Caracas, Venezuela',
-    image: '/images/malls/fachada-tolon-1.jpg',
-    description: 'Centro comercial de moda y estilo de vida ubicado en una zona estratégica de Caracas. Referente de lujo y exclusividad corporativa.',
-    stats: { stores: '+150 Marcas', footfall: 'Alto Tráfico' }
-  },
-  {
-    id: 2,
-    name: 'Paseo El Hatillo',
-    slug: 'paseo-el-hatillo',
-    location: 'El Hatillo, Caracas, Venezuela',
-    image: '/images/malls/4938623117048261886.jpg',
-    description: 'Destino turístico y comercial que combina la modernidad arquitectónica con el encanto de El Hatillo. Experiencia familiar y de entretenimiento.',
-    stats: { stores: '+120 Marcas', footfall: 'Mix Familiar' }
-  },
-  {
-    id: 3,
-    name: 'Llano Mall Ciudad Comercial',
-    slug: 'llano-mall-ciudad-comercial',
-    location: 'Acarigua, Portuguesa, Venezuela',
-    image: '/images/malls/8826667.jpg',
-    description: 'El principal y más amplio centro de compras y entretenimiento de los llanos venezolanos. Variedad, confort y crecimiento constante en un solo lugar.',
-    stats: { stores: '+200 Locales', footfall: 'Sede Regional' }
-  },
-]
-
-// Stagger definitions
 const staggerContainer = {
   hidden: { opacity: 0 },
   show: {
@@ -61,6 +32,29 @@ const fadeUpVariant = {
 }
 
 export function MallsClient() {
+  const [malls, setMalls] = useState<Mall[]>([])
+
+  useEffect(() => {
+    getStrapiMedia('/api/malls?populate[0]=MainImage&populate[1]=Stats').then((res) => {
+      if (res && res.data) {
+        const mapped = res.data.map((mall: any) => ({
+          id: mall.id,
+          name: mall.Name,
+          slug: mall.Slug,
+          location: mall.Location,
+          image: mall.MainImage?.url ? `${STRAPI_BASE_URL}${mall.MainImage.url}` : '/images/assets/bg-ivc-4.jpg',
+          description: mall.Description,
+          stats: { 
+             stores: `+${mall.Stats?.Stores || 0} Marcas`, 
+             // Using Performance's Annual Visitors directly if footfall text doesn't exist to simulate it:
+             footfall: mall.Performance?.AnnualVisitors || 'Alto Tráfico' 
+          }
+        }))
+        setMalls(mapped)
+      }
+    })
+  }, [])
+
   return (
     <>
       {/* 1. DISCOVERY & STORYTELLING NARRATIVE */}
@@ -159,6 +153,7 @@ export function MallsClient() {
                         src={mall.image}
                         alt={mall.name}
                         fill
+                        unoptimized
                         className="object-cover transition-transform duration-1000 group-hover:scale-110 ease-out overflow-hidden"
                       />
                       

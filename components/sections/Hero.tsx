@@ -4,47 +4,45 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getStrapiMedia, STRAPI_BASE_URL } from '@/lib/tools'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 
-const heroSlides = [
-  {
-    id: 1,
-    image: '/images/hero/avila-landscape-home.jpg',
-    title: 'Más de 100 Años Construyendo el Futuro Inmobiliario',
-    subtitle: 'Un siglo de inversión, tradición e innovación empresarial. Desde 1925, combinando tradición con visión futurista para construir una trayectoria de éxito.',
-    ctaText: 'Descubre Nuestros Proyectos',
-    ctaLink: '/centros-comerciales',
-  },
-  {
-    id: 2,
-    image: '/images/hero/FVI-2321.jpg',
-    title: 'Tolón, Paseo El Hatillo y Llano Mall',
-    subtitle: 'Centros comerciales de alta gama que transforman la experiencia de compra y entretenimiento en Venezuela',
-    ctaText: 'Explorar Centros Comerciales',
-    ctaLink: '/centros-comerciales',
-  },
-  {
-    id: 3,
-    image: '/images/hero/avila-landscape-new-2.jpg',
-    title: 'Invaca Investment Company',
-    subtitle: 'Expertos en inversión inmobiliaria y financiera en Venezuela desde 1955',
-    ctaText: 'Conoce más sobre Invaca',
-    ctaLink: '/nosotros',
-  },
-]
-
 export function Hero() {
+  const [slides, setSlides] = useState<any[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(0)
 
   useEffect(() => {
+    // Fetch data from Strapi Single Type "Home Page"
+    getStrapiMedia('/api/home-page?populate=HeroSlides.Image').then((strapiData) => {
+      if (strapiData?.data?.HeroSlides) {
+        const mappedSlides = strapiData.data.HeroSlides.map((slide: any) => {
+          const imageUrl = slide.Image?.url ? `${STRAPI_BASE_URL}${slide.Image.url}` : ''
+          
+          return {
+            id: slide.id,
+            image: imageUrl,
+            title: slide.Title,
+            subtitle: slide.Subtitle,
+            ctaText: slide.ctaText,
+            ctaLink: slide.ctaLink || '#',
+          }
+        })
+        setSlides(mappedSlides)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
+    if (slides.length === 0) return
+
     const interval = setInterval(() => {
       setDirection(1)
-      setCurrentIndex((prev) => (prev + 1) % heroSlides.length)
+      setCurrentIndex((prev) => (prev + 1) % slides.length)
     }, 6000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [slides.length])
 
   const goToSlide = (index: number) => {
     setDirection(index > currentIndex ? 1 : -1)
@@ -53,15 +51,17 @@ export function Hero() {
 
   const goToPrevious = () => {
     setDirection(-1)
-    setCurrentIndex((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)
+    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length)
   }
 
   const goToNext = () => {
     setDirection(1)
-    setCurrentIndex((prev) => (prev + 1) % heroSlides.length)
+    setCurrentIndex((prev) => (prev + 1) % slides.length)
   }
 
-  const currentHero = heroSlides[currentIndex]
+  const currentHero = slides[currentIndex]
+
+  if (!currentHero) return <div className="w-full h-[91vh] min-h-[700px] bg-dark animate-pulse" />
 
   const variants = {
     enter: (direction: number) => ({
@@ -102,6 +102,7 @@ export function Hero() {
               src={currentHero.image}
               alt={currentHero.title}
               fill
+              unoptimized
               className="object-cover"
               priority
             />
@@ -190,7 +191,7 @@ export function Hero() {
 
         {/* Slide Indicators */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-          {heroSlides.map((_, index) => (
+          {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}

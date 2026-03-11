@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { HeroParallax } from '@/components/ui/HeroParallax'
 import { InvestorHubClient } from './InvestorHubClient'
+import { getStrapiMedia } from '@/lib/tools';
 
 export const metadata: Metadata = {
   title: 'Investor Hub | INVACA',
@@ -31,32 +32,6 @@ const tickerData = [
   }
 ]
 
-const financialDocs = [
-  {
-    year: '2025',
-    period: '2025 - 2024',
-    title: 'Estados financieros consolidados al 30 de junio 2025 y 2024 e informe de los contadores públicos independientes.',
-    file: '/docs/estados-financieros-2025-2024.pdf',
-  },
-  {
-     year: '2024',
-    period: '2024 - 2023',
-    title: 'Estados financieros consolidados al 30 de junio 2024 y 2023 e informe de los contadores públicos independientes.',
-    file: '/docs/estados-financieros-2024-2023.pdf',
-  },
-  {
-     year: '2023',
-    period: '2023 - 2022',
-    title: 'Estados financieros consolidados al 30 de junio 2023 y 2022 e informe de los contadores públicos independientes.',
-    file: '/docs/estados-financieros-2023-2022.pdf',
-  },
-    {
-     year: '2022',
-    period: '2022 - 2021',
-    title: 'Estados financieros consolidados al 30 de junio 2022 y 2021 e informe de los contadores públicos independientes.',
-    file: '/docs/estados-financieros-2022-2021.pdf',
-  },
-]
 
 const assemblyCalls = [
   {
@@ -77,7 +52,22 @@ const assemblyCalls = [
   },
 ]
 
-export default function InvestorHubPage() {
+export default async function InvestorHubPage() {
+  const strapiData = await getStrapiMedia('/api/reports?populate=*');
+  
+  const financialDocs = strapiData?.data?.map((report: any) => {
+    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://192.168.101.23:1337';
+    // Append the Strapi URL if the file exists
+    const fileUrl = report.File?.url ? `${strapiUrl}${report.File.url}` : '';
+    
+    return {
+      year: report.Year?.toString() || '',
+      period: report.Period || '',
+      title: report.Title || '',
+      file: fileUrl,
+    };
+  }) || [];
+
   return (
     <div className="min-h-screen bg-white selection:bg-accent selection:text-white">
       {/* 1. Hero Section (Reused Component) */}

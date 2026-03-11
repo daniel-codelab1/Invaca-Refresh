@@ -2,7 +2,8 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { getStrapiMedia } from '@/lib/tools'
 
 interface TimelineEvent {
   year: string;
@@ -11,35 +12,34 @@ interface TimelineEvent {
   image: string;
 }
 
-const introText = "INVACA es un ejemplo vivo de cómo combinar tradición con una visión futurista para construir una trayectoria de éxito.";
-
 export default function NosotrosPage() {
-  const timelineEvents: TimelineEvent[] = [
-    {
-      year: '1925',
-      title: 'Fundación y Orígenes',
-      description: 'Fundada el 24 de abril de 1925 como C.A. Cervecería Caracas. Desde entonces, hemos liderado procesos de modernización urbana, desarrollando proyectos comerciales, residenciales y de oficinas que han definido el paisaje urbano de Caracas y otras ciudades del país.',
-      image: '/images/assets/saman-ivc-1.jpg'
-    },
-    {
-      year: '1955',
-      title: 'Consolidación en el mercado de capitales',
-      description: 'Evolucionamos hacia un enfoque más amplio y estratégico. Adoptamos la denominación Compañía Anónima de Inmuebles y Valores Caracas (INVACA). El 19 de diciembre de ese mismo año nos convertimos en una empresa pública al inscribirse en la Bolsa de Valores de Caracas, consolidándonos como pioneros.',
-      image: '/images/assets/team-invaca.jpg'
-    },
-    {
-      year: '2017',
-      title: 'Transformación Estratégica',
-      description: 'Dimos un nuevo paso significativo al transformarnos en una Sociedad Anónima de Capital Autorizado. Con la denominación renovada como INVACA, Inmuebles, Valores y Capitales, S.A.C.A., reafirmamos nuestra intención de diversificar nuestras operaciones.',
-      image: '/images/assets/our-team.jpg'
-    },
-    {
-      year: '2024',
-      title: 'Nace INVACA Investment Company',
-      description: 'Alcanzamos un nuevo hito histórico al absorber al Fondo de Valores Inmobiliarios (FVI), consolidando nuestra posición como la empresa líder en el sector inmobiliario y financiero en Venezuela. Combinamos una sólida herencia con una visión moderna y global.',
-      image: '/images/assets/geometric-bg.jpg'
-    }
-  ]
+  const [introText, setIntroText] = useState("Convertimos trayectoria en gestión: consistencia, cuidado del portafolio y mejora continua en cada activo y proyecto.");
+  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([]);
+
+  useEffect(() => {
+    getStrapiMedia('/api/history?populate=HistoryBlocks.Image').then((strapiData) => {
+      if (strapiData?.data) {
+        if (strapiData.data.Statement) {
+          setIntroText(strapiData.data.Statement);
+        }
+        
+        if (strapiData.data.HistoryBlocks) {
+          const mappedEvents = strapiData.data.HistoryBlocks.map((block: any) => {
+            const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://192.168.101.23:1337';
+            const imageUrl = block.Image?.url ? `${strapiUrl}${block.Image.url}` : '/images/assets/geometric-bg.jpg';
+            
+            return {
+              year: block.Year || '',
+              title: block.Title || '',
+              description: block.Description || '',
+              image: imageUrl,
+            };
+          });
+          setTimelineEvents(mappedEvents);
+        }
+      }
+    });
+  }, []);
 
   // Parallax Setup for Hero
   const heroRef = useRef(null)
@@ -188,12 +188,13 @@ export default function NosotrosPage() {
                     <motion.div 
                       whileHover={{ scale: 1.02 }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      className="relative aspect-[4/3] w-full overflow-hidden rounded-md shadow-xl group-hover:shadow-2xl transition-shadow duration-500"
+                      className="relative aspect-[4/3] w-full overflow-hidden rounded-xs transition-shadow duration-500"
                     >
                       <Image
-                        src={event.image}
+                        src={event.image || '/images/assets/geometric-bg.jpg'}
                         alt={event.title}
                         fill
+                        unoptimized
                         className="object-cover transition-transform duration-1000 group-hover:scale-110"
                       />
                       {/* Subtle Overlay that fades on hover */}
@@ -229,7 +230,7 @@ export default function NosotrosPage() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto space-y-8"
           >
-            <h2 className="text-4xl md:text-6xl font-display font-medium text-white mb-8 tracking-tight drop-shadow-lg">
+            <h2 className="text-4xl md:text-6xl font-display font-medium text-white mb-8 tracking-tight">
               Tradición, innovación y futuro
             </h2>
             <p className="text-body-md md:text-body-lg text-cream-100/90 font-body font-light leading-relaxed">

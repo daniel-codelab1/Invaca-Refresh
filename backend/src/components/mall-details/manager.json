@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_mall_details_managers",
+  "info": {
+    "displayName": "Manager"
+  },
+  "options": {},
+  "attributes": {
+    "Role": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "email"
+    },
+    "Photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

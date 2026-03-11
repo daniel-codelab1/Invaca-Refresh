@@ -14,6 +14,7 @@ export interface MallData {
   description: string
   heroVideo: string
   image: string
+  image2: string
   commercialArea: string
   stats: {
     stores: number
@@ -426,7 +427,7 @@ export function MallDetailView({ mall }: { mall: MallData }) {
             <div className="absolute inset-0">
                {/* Using mall.image as the large photo section */}
                <img 
-                 src={mall.image} 
+                 src={mall.image2} 
                  alt={mall.name} 
                  className="w-full h-full object-cover rounded-xs"
                />

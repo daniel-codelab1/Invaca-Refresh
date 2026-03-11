@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useState } from 'react';
+import { getStrapiMedia, STRAPI_BASE_URL } from '@/lib/tools';
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
@@ -17,43 +19,27 @@ const FadeIn = ({ children, delay = 0, className = "" }: { children: React.React
 )
 
 export default function OtrosActivosPage() {
-  const assets = [
-    {
-      name: 'Torre El Samán',
-      type: 'Desarrollo de Oficinas',
-      location: 'Av. Venezuela, El Rosal, Caracas',
-      description: 'Edificio de oficinas de gran prestigio. Su diseño arquitectónico moderno y elegante la convierte en un punto de referencia, albergando una variedad de empresas nacionales e internacionales.',
-      image: '/images/other-assets/torre-saman-superior.jpg',
-    },
-    {
-      name: 'Centro Empresarial Galipán',
-      type: 'Complejo Corporativo',
-      location: 'Av. Tamanaco, El Rosal, Caracas',
-      description: 'Complejo corporativo equipado con tecnología de avanzada y elegantes acabados de primera línea. Cuenta con locales comerciales en el corazón empresarial de la ciudad.',
-      image: '/images/other-assets/torre-galipan-1.jpg',
-    },
-    {
-      name: 'Torre Menegrande',
-      type: 'Sede Corporativa Original',
-      location: 'Av. Francisco de Miranda, Los Palos Grandes',
-      description: 'Desarrollo conformado por dos edificaciones independientes en sus accesos y servicios, ubicado estratégicamente en el corazón financiero del área metropolitana.',
-      image: '/images/other-assets/torre-menegrande.jpg',
-    },
-    {
-      name: 'Torre Provincial',
-      type: 'Centro Financiero',
-      location: 'Av. Francisco de Miranda, Chacao',
-      description: 'Estructura sólida en el centro financiero caraqueño. Consta de planta baja, tres niveles de estacionamiento, tres sótanos y 15 pisos destinados exclusivamente para uso corporativo.',
-      image: '/images/other-assets/torre-provincial.jpg',
-    },
-    {
-      name: 'Premium La Escondida',
-      type: 'Conjunto Residencial',
-      location: 'La Tahona, municipio Baruta, Caracas',
-      description: 'Maravilloso conjunto residencial ubicado en una zona céntrica, caracterizado por su agradable clima de montaña y rodeado de exhuberante flora y extensas áreas verdes.',
-      image: '/images/other-assets/la-escondida.jpeg',
-    }
-  ]
+  const [assets, setAssets] = useState<any[]>([]);
+
+  useEffect(() => {
+    getStrapiMedia('/api/old-assets?populate=*').then((strapiData) => {
+      if (strapiData?.data) {
+        const mappedAssets = strapiData.data.map((asset: any) => {
+        const imageUrl = asset.Image?.url ? `${STRAPI_BASE_URL}${asset.Image.url}` : '';
+          return {
+            name: asset.Name,
+            type: asset.Type,
+            location: asset.Location,
+            description: asset.Description,
+            image: imageUrl,
+          };
+        });
+        setAssets(mappedAssets);
+      }
+    });
+  }, []);
+
+  console.log(assets);
 
   return (
     <div className="min-h-screen bg-white selection:bg-accent selection:text-white">
@@ -123,11 +109,12 @@ export default function OtrosActivosPage() {
                      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                      className="w-full lg:w-1/2"
                    >
-                     <div className="relative aspect-square md:aspect-[4/5] w-full overflow-hidden">
+                     <div className="relative aspect-square md:aspect-[4/5] w-full overflow-hidden">     
                        <Image
-                         src={asset.image}
+                         src={asset.image || '/images/assets/geometric-bg-3.png'}
                          alt={asset.name}
                          fill
+                         unoptimized
                          className="object-cover"
                        />
                        <div className="absolute inset-0 bg-dark/10" />

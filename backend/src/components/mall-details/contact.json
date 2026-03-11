@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_mall_details_contacts",
+  "info": {
+    "displayName": "Contact"
+  },
+  "options": {},
+  "attributes": {
+    "Phone": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "email"
+    },
+    "OpeningHours": {
+      "type": "string"
+    },
+    "Website": {
+      "type": "string"
+    },
+    "Instagram": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

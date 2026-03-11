@@ -4,6 +4,7 @@ import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { CookieConsent } from '@/components/layout/CookieConsent'
+import { Preloader } from '@/components/ui/Preloader'
 
 const dmSerif = DM_Serif_Display({
   weight: '400',
@@ -34,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${dmSerif.variable} ${manrope.variable}`}>
       <body className="min-h-screen bg-white text-gray-900 antialiased">
+        <Preloader />
         <Header />
         <main className="flex-1">
           {children}
