@@ -459,35 +459,37 @@ export function MallDetailView({ mall }: { mall: MallData }) {
       </section>
 
       {/* NEW: 6. Main Brands Section */}
-      <section className="py-20 lg:py-28 bg-white">
-         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-               
-               {/* Left Column: Text */}
-               <FadeIn>
-                  <h2 className="text-3xl md:text-5xl font-display font-medium w-full lg:w-9/12 text-dark mb-6">
-                    Las mejores marcas en un solo lugar
-                  </h2>
-                  <p className="text-body-sm lg:text-body text-slate-500 font-body w-full lg:w-10/12 leading-relaxed mb-12">
-                    Disfruta de una selección curada de marcas nacionales e internacionales. Moda, tecnología, hogar y mucho más, todo pensado para brindarte la mejor experiencia de compra.
-                  </p>
-                  <Link 
-                    href="#" 
-                    className="inline-flex items-center px-8 h-14 bg-dark text-white font-body font-semibold text-body tracking-wide hover:bg-accent transition-colors duration-300"
-                  >
-                    Ver todas las marcas
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                  </Link>
-               </FadeIn>
+      {mall.brands && mall.brands.length > 0 && (
+        <section className="py-20 lg:py-28 bg-white">
+           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                 
+                 {/* Left Column: Text */}
+                 <FadeIn>
+                    <h2 className="text-3xl md:text-5xl font-display font-medium w-full lg:w-9/12 text-dark mb-6">
+                      Las mejores marcas en un solo lugar
+                    </h2>
+                    <p className="text-body-sm lg:text-body text-slate-500 font-body w-full lg:w-10/12 leading-relaxed mb-12">
+                      Disfruta de una selección curada de marcas nacionales e internacionales. Moda, tecnología, hogar y mucho más, todo pensado para brindarte la mejor experiencia de compra.
+                    </p>
+                    <Link 
+                      href="#" 
+                      className="inline-flex items-center px-8 h-14 bg-dark text-white font-body font-semibold text-body tracking-wide hover:bg-accent transition-colors duration-300"
+                    >
+                      Ver todas las marcas
+                      <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                 </FadeIn>
 
-               {/* Right Column: Animated Grid */}
-               <FadeIn delay={0.2}>
-                  <AnimatedBrandGrid brands={mall.brands} />
-               </FadeIn>
+                 {/* Right Column: Animated Grid */}
+                 <FadeIn delay={0.2}>
+                    <AnimatedBrandGrid brands={mall.brands} />
+                 </FadeIn>
 
-            </div>
-         </div>
-      </section>
+              </div>
+           </div>
+        </section>
+      )}
 
       {/* TODO: Restore and redesign Experience Section once correct info is available.
       <section className="py-20 lg:py-28">

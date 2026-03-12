@@ -30,7 +30,7 @@ function mapStrapiMall(apiData: any): MallData | null {
       role: m.Role || '',
       name: m.Name || '',
       email: m.Email || '',
-      image: m.Image?.url ? `${STRAPI_BASE_URL}${m.Image.url}` : 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80',
+      image: m.Photo?.url ? `${STRAPI_BASE_URL}${m.Photo.url}` : 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80',
     })) : [],
     performance: {
       annualVisitors: apiData.Performance?.AnnualVisitors || '',
