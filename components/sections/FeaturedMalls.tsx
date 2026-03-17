@@ -41,7 +41,7 @@ export function FeaturedMalls() {
   }, [])
 
   return (
-    <section className="pt-32 pb-36">
+    <section className="pt-20 lg:pt-32 pb-20 lg:pb-36">
       <div className="container mx-auto px-4 sm:px-6">
         {/* Header Section */}
         <motion.div
@@ -54,7 +54,7 @@ export function FeaturedMalls() {
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
             {/* Title - Left */}
             <div className="flex-1">
-              <h2 className="text-3xl md:text-4xl lg:text-6xl font-display font-normal text-dark mb-0 tracking-tight !leading-[4rem]">
+              <h2 className="text-4xl lg:text-6xl font-display font-normal text-dark mb-0 tracking-tight leading-tight lg:!leading-[4rem]">
                 Explora Nuestros <br /> Centros Comerciales
               </h2>
             </div>
@@ -116,7 +116,7 @@ export function FeaturedMalls() {
               {/* Content */}
               <div className="p-6 relative z-10 bg-white border border-neutral-900 border-t-0">
                 {/* Mall Name */}
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-display font-normal mb-3 leading-tight w-fit text-transparent bg-clip-text bg-gradient-to-r from-dark from-40% via-white/20 via-50% to-dark to-60% bg-[length:300%_100%] bg-right group-hover:bg-left transition-none group-hover:transition-all group-hover:duration-1000 group-hover:ease-in-out">
+                <h3 className="text-2xl lg:text-3xl font-display font-normal mb-3 leading-tight w-fit text-transparent bg-clip-text bg-gradient-to-r from-dark from-40% via-white/20 via-50% to-dark to-60% bg-[length:300%_100%] bg-right group-hover:bg-left transition-none group-hover:transition-all group-hover:duration-1000 group-hover:ease-in-out">
                   {mall.name}
                 </h3>
 

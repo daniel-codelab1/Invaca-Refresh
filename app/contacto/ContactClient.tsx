@@ -64,7 +64,7 @@ export function ContactClient() {
       {/* 1. Hero with True Parallax */}
       <section
         ref={heroRef}
-        className="relative h-[70vh] md:h-[80vh] min-h-[470px] w-full flex items-center justify-center overflow-hidden p-4"
+        className="relative h-[65vh] md:h-[80vh] min-h-[470px] w-full flex items-center justify-center overflow-hidden p-4"
       >
         <motion.div className="absolute inset-0 z-0 bg-dark" style={{ y: heroY }}>
           <Image
@@ -80,7 +80,7 @@ export function ContactClient() {
         </motion.div>
 
         <motion.div
-          className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-20"
+          className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-0 md:mt-20"
           style={{ opacity: heroOpacity }}
         >
           <motion.div
@@ -125,7 +125,7 @@ export function ContactClient() {
                   <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-dark mb-6 leading-[1.1] pr-0 lg:pr-10">
                     Gracias por su interés en <span className="text-accent italic">Invaca</span>
                   </h2>
-                  <p className="text-lg text-slate font-body font-light mb-8 max-w-lg">
+                  <p className="text-body md:text-body-lg text-slate font-body font-light mb-8 max-w-lg">
                     ¿Qué área de la empresa quisiera contactar? Ponemos a su disposición distintos canales de comunicación para brindarle una atención más efectiva y oportuna.
                   </p>
                 </motion.div>
@@ -198,7 +198,7 @@ export function ContactClient() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-10 max-w-7xl mx-auto">
             <div className="w-full lg:w-6/12">
-              <h2 className="text-2xl md:text-3xl lg:text-5xl font-display font-medium text-dark mb-4">
+              <h2 className="text-3xl lg:text-5xl font-display font-medium text-dark mb-0 md:mb-4">
                 Departamentos
               </h2>
             </div>
@@ -218,7 +218,7 @@ export function ContactClient() {
                     {dept.phone && (
                       <a
                         href={dept.phoneHref!}
-                        className="flex items-center gap-2.5 text-body-sm text-slate-500 hover:text-accent transition-colors font-body"
+                        className="flex items-center gap-2.5 text-body text-slate-500 hover:text-accent transition-colors font-body"
                       >
                         <Phone className="w-3.5 h-3.5 flex-shrink-0" />
                         {dept.phone}
@@ -226,7 +226,7 @@ export function ContactClient() {
                     )}
                     <a
                       href={dept.emailHref}
-                      className="flex items-center gap-2.5 text-sm text-slate-500 hover:text-accent transition-colors font-body break-all"
+                      className="flex items-center gap-2.5 text-body text-slate-500 hover:text-accent transition-colors font-body break-all"
                     >
                       <Mail className="w-3.5 h-3.5 flex-shrink-0" />
                       {dept.email}

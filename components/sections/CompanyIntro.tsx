@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react'
 
 export function CompanyIntro() {
   return (
-    <section className="mx-auto px-4 sm:px-6 w-full pt-12 pb-20">
+    <section className="mx-auto px-0 sm:px-6 w-full pt-12 pb-12 lg:pb-20">
       <div className="flex flex-col lg:flex-row min-h-[400px] md:min-h-[600px] lg:min-h-[735px]">
         {/* Left Column - Image */}
         <motion.div 
@@ -15,7 +15,7 @@ export function CompanyIntro() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="w-full lg:w-1/2 mt-14 mb-[-3.5em] relative min-h-[400px] md:min-h-[600px] lg:min-h-full "
+          className="w-full lg:w-1/2 mt-0 md:mt-10 lg:mt-14 mb-0 lg:mb-[-3.5em] relative min-h-[400px] md:min-h-[600px] lg:min-h-full "
         >
           <Image
             src="/images/assets/saman-ivc-1.jpg"
@@ -32,9 +32,9 @@ export function CompanyIntro() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full lg:w-1/2 bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center text-white flex flex-col justify-center p-12 lg:p-24"
+          className="w-full lg:w-1/2 bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center text-white flex flex-col justify-center py-12 px-6 md:p-12 lg:p-24"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-6xl font-display font-medium mb-6 !leading-[4rem]">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-display font-medium mb-6 leading-tight lg:!leading-[4rem]">
             Un Siglo de Trayectoria Empresarial en Venezuela
           </h2>
           

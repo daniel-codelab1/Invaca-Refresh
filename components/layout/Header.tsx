@@ -5,14 +5,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { Navigation } from './Navigation'
+import { MobileBottomNav } from './MobileBottomNav'
+import { MobileSidebar } from './MobileSidebar'
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <>
+      <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex h-20 items-center justify-between">
+        <div className="flex h-20 items-center justify-center lg:justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
@@ -44,8 +47,8 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
+          {/* Mobile Menu Button - HIDDEN entirely to use BottomNav */}
+          {/* <button
             className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
@@ -55,30 +58,17 @@ export function Header() {
             ) : (
               <Menu className="h-6 w-6" />
             )}
-          </button>
+          </button> */}
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <nav className="flex flex-col space-y-4">
-              <Navigation mobile />
-              <div className="flex items-center justify-between pt-4 border-t">
-                {/* <select className="text-body-sm font-body border border-gray-300 rounded px-2 py-1 rounded-lg">
-                  <option value="es">ES</option>
-                  <option value="en">EN</option>
-                </select> */}
-                <Link
-                  href="/contacto"
-                  className="px-4 py-2 bg-accent text-white hover:bg-accent-600 transition-colors font-display font-medium text-body-sm"
-                >
-                  Contacto
-                </Link>
-              </div>
-            </nav>
-          </div>
-        )}
       </div>
-    </header>
+      </header>
+
+      {/* Modern App-style Mobile Navigation */}
+      <MobileBottomNav 
+        onOpenMenu={() => setIsSidebarOpen(true)} 
+        onCloseMenu={() => setIsSidebarOpen(false)} 
+      />
+      <MobileSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+    </>
   )
 }

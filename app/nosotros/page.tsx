@@ -71,7 +71,7 @@ export default function NosotrosPage() {
   return (
     <div className="min-h-screen selection:bg-accent selection:text-white">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative h-[70vh] md:h-[80vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden p-4">
+      <section ref={heroRef} className="relative h-[65vh] md:h-[80vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden p-4">
         {/* Background Image with Overlay & Parallax */}
         <motion.div 
           className="absolute inset-0 z-0 bg-dark"
@@ -90,7 +90,7 @@ export default function NosotrosPage() {
         </motion.div>
 
         <motion.div 
-          className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-20"
+          className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-0 lg:mt-20"
           style={{ opacity: heroOpacity }}
         >
           <motion.div
@@ -112,10 +112,10 @@ export default function NosotrosPage() {
       </section>
 
       {/* Intro Section with Word Reveal */}
-      <section className="py-24 lg:py-32">
+      <section className="py-16 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-5xl mx-auto text-center mt-12">
-            <h2 className="relative inline-block text-2xl md:text-4xl lg:text-5xl lg:text-[3rem] border-2 border-dark/10 p-10 md:p-20 font-display font-medium text-dark leading-relaxed before:absolute before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white">
+          <div className="max-w-5xl mx-auto text-justify lg:text-center mt-12">
+            <h2 className="relative inline-block text-3xl md:text-4xl lg:text-5xl lg:text-[3rem] border-2 border-dark/10 p-10 md:p-20 font-display font-medium text-dark leading-tight lg:leading-relaxed before:absolute before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white">
               {words.map((word, i) => (
                 <motion.span
                   key={i}
@@ -156,13 +156,13 @@ export default function NosotrosPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-150px" }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className={`flex flex-col md:flex-row items-center gap-12 lg:gap-24 mb-32 md:mb-48 last:mb-0 ${
+                  className={`flex flex-col md:flex-row items-center gap-12 lg:gap-24 mb-24 sm:mb-32 md:mb-48 last:mb-0 ${
                     !isEven ? 'md:flex-row-reverse' : ''
                   }`}
                 >
                   {/* Text Content */}
                   <div className={`w-full md:w-1/2 space-y-6 flex flex-col ${!isEven ? 'md:items-start' : 'md:items-end md:text-right'}`}>
-                    <div className={`flex items-center gap-6 mb-2 ${!isEven ? 'flex-row' : 'flex-row-reverse'}`}>
+                    <div className={`flex items-center gap-6 mb-2 ${!isEven ? 'flex-row' : 'flex-row lg:flex-row-reverse'}`}>
                       <span className="text-6xl md:text-8xl font-display font-extralight text-dark tracking-tighter">
                         {event.year}
                       </span>
@@ -209,7 +209,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* Outro Section with Parallax Image */}
-      <section ref={outroRef} className="py-32 lg:py-48 bg-dark text-white relative overflow-hidden">
+      <section ref={outroRef} className="py-24 md:py-32 lg:py-48 bg-dark text-white relative overflow-hidden">
         <motion.div 
           className="absolute inset-0 opacity-20"
           style={{ y: outroY }}

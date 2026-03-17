@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Company Info */}
-          <div className="space-y-8 col-span-1 flex justify-center items-center flex-col">
+          <div className="space-y-8 lg:col-span-1 flex justify-center items-center flex-col mb-8 lg:mb-0">
             <Link href="/" className="flex items-center">
               <Image
                 src="/logos/LogotipoInvacaNegativo.png"
@@ -39,7 +39,7 @@ export function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className='col-start-3'>
+          <div className='lg:col-start-3'>
             <h3 className="text-white font-medium text-2xl mb-8">Enlaces Rápidos</h3>
             <ul className="space-y-5 text-sm">
               <li>
@@ -73,7 +73,7 @@ export function Footer() {
           {/* Services */}
           <div>
             <h3 className="text-white font-medium text-2xl mb-8">Información</h3>
-            <ul className="space-y-4 text-sm">
+            <ul className="space-y-5 text-sm">
               <li>
                 <Link href="/investor-hub" className="hover:text-accent transition-colors">
                   Investor Hub
@@ -85,13 +85,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/bolsa-valores" className="hover:text-accent transition-colors">
+                <Link href="https://www.bolsadecaracas.com/resumen-mercado/?simb=IVC.A" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                   Bolsa de Valores (IVC.A, IVC.B)
                 </Link>
               </li>
               <li>
-                <Link href="/historia" className="hover:text-accent transition-colors">
+                <Link href="/nosotros" className="hover:text-accent transition-colors">
                   Nuestra Historia
+                </Link>
+              </li>
+              <li>
+                <Link href="/nosotros/gobernanza" className="hover:text-accent transition-colors">
+                  Gobernanza
                 </Link>
               </li>
             </ul>
@@ -122,15 +127,15 @@ export function Footer() {
 
         <div className="mt-28">
           <h5 className="text-white/40 font-medium font-body text-sm mb-2">“Entidad Regulada y Supervisada por la Superintendencia del Mercado de Valores”</h5>
-          <p className="text-[12px] text-white/40 font-body font-light pr-10 leading-relaxed pb-8 inline-block">La Superintendencia Nacional de Valores de la República Bolivariana de Venezuela, es el ente encargado de regular y supervisar el funcionamiento eﬁciente del mercado de valores, para la protección de las personas que han realizado inversiones en los valores a los cuales se reﬁere la Ley del Mercado de Valores, y para estimular el desarrollo productivo del país, bajo la vigilancia y coordinación del Órgano Superior del Sistema Financiero Nacional (Ministerio del Poder Popular de Planiﬁcación y Finanzas).</p>
+          <p className="text-[12px] text-white/40 font-body font-light pr-0 lg:pr-10 text-justify lg:text-left leading-relaxed pb-8 inline-block">La Superintendencia Nacional de Valores de la República Bolivariana de Venezuela, es el ente encargado de regular y supervisar el funcionamiento eﬁciente del mercado de valores, para la protección de las personas que han realizado inversiones en los valores a los cuales se reﬁere la Ley del Mercado de Valores, y para estimular el desarrollo productivo del país, bajo la vigilancia y coordinación del Órgano Superior del Sistema Financiero Nacional (Ministerio del Poder Popular de Planiﬁcación y Finanzas).</p>
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate/30 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-sm text-white/70">
+          <p className="text-sm mb-4 md:mb-0 text-white/70">
             © {new Date().getFullYear()}, Invaca Investment Company RIF J-000199310. Todos los derechos reservados.
           </p>
-          <div className="flex space-x-7 text-sm">
+          <div className="flex space-x-7 w-full lg:w-auto justify-center lg:justify-start text-sm">
             <Link href="/privacidad" className="hover:text-accent transition-colors">
               Privacidad
             </Link>

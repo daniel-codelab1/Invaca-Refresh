@@ -76,7 +76,7 @@ export default function GobernanzaPage() {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative h-[70vh] md:h-[80vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden p-4"
+        className="relative h-[65vh] md:h-[80vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden p-4"
       >
         {/* Background Image Setup */}
         <motion.div
@@ -96,7 +96,7 @@ export default function GobernanzaPage() {
         </motion.div>
 
         <motion.div
-          className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-20"
+          className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-0 lg:mt-20"
           style={{ opacity: heroOpacity }}
         >
           <motion.div
@@ -118,10 +118,10 @@ export default function GobernanzaPage() {
       </section>
 
       {/* Intro Box with Word Reveal */}
-      <section className="py-24 lg:py-32">
+      <section className="py-16 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-5xl mx-auto text-center mt-12">
-            <h2 className="relative inline-block text-2xl md:text-4xl lg:text-[2.5rem] border-2 border-dark/10 p-10 md:p-20 font-display font-medium text-dark leading-relaxed before:absolute before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white">
+          <div className="max-w-5xl mx-auto text-justify lg:text-center mt-12">
+            <h2 className="relative inline-block text-3xl md:text-4xl lg:text-[2.5rem] border-2 border-dark/10 p-10 md:p-20 font-display font-medium text-dark leading-tight lg:leading-snug before:absolute before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white">
               {words.map((word, i) => (
                 <motion.span
                   key={i}
@@ -192,7 +192,7 @@ export default function GobernanzaPage() {
                 </motion.div>
 
                 {/* Text Content */}
-                <div className="text-center w-full px-4 mt-2">
+                <div className="text-center w-full px-4 mt-2 mb-4 lg:mb-0">
                   <h3 className="text-2xl font-display font-medium text-dark mb-2 transition-colors duration-300 group-hover:text-accent">
                     {member.name}
                   </h3>

@@ -73,10 +73,10 @@ export function InvestorSection() {
   }, []);
 
   return (
-    <section className="pt-36 pb-20">
+    <section className="pt-12 lg:pt-36 pb-20">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="w-full h-full mb-20">
-          <h2 className="text-3xl md:text-4xl lg:text-6xl text-center font-display font-normal text-dark mb-6 tracking-tight !leading-[4rem]">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl text-center font-display font-normal text-dark mb-6 tracking-tight leading-tight lg:!leading-[4rem]">
             Consolidados en el Mercado de Capitales
           </h2>
           <p className="text-body-md text-slate-500 font-body leading-relaxed text-center">
@@ -94,13 +94,13 @@ export function InvestorSection() {
             className="lg:col-span-3 relative flex flex-col"
           >
             <div className="">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex flex-col md:flex-row items-center justify-between mb-10 lg:mb-6">
                 <h2 className="text-2xl md:text-3xl font-display font-medium text-dark">
                   IVC.{activeTab} <span className="text-slate/60 text-xl ml-2 font-body font-normal">Bolsa de Valores de Caracas</span>
                 </h2>
                 
                 {/* Tabs */}
-                <div className="flex bg-gray-100 p-1 rounded-sm">
+                <div className="flex bg-gray-100 p-1 rounded-sm mt-6 md:mt-0">
                   <button
                     onClick={() => setActiveTab('A')}
                     className={`px-4 py-2 text-sm font-medium rounded-sm transition-all ${
@@ -126,7 +126,7 @@ export function InvestorSection() {
               
               {/* Chart */}
               <div className="relative w-full h-[570px] bg-white flex items-center justify-center overflow-hidden">
-                <div className="absolute top-6 left-4 w-14 h-14 rounded-full overflow-hidden bg-slate-900 p-2 flex items-center justify-center z-10">
+                <div className="absolute top-3 left-3 lg:top-6 lg:left-4 w-10 h-10 lg:w-14 lg:h-14 rounded-full overflow-hidden bg-slate-900 p-2 flex items-center justify-center z-10">
                   <Image
                     src="/logos/LogotipoInvacaNegativo.png"
                     alt="INVACA Investment Company"
@@ -136,9 +136,9 @@ export function InvestorSection() {
                     priority
                   />
                 </div>
-                <div className="absolute top-3 left-20 px-2 py-1 w-5/6 bg-white z-10">
-                  <p className='text-body-lg text-dark font-body font-bold'>
-                    Invaca Investment Company S.A.C.A Class {activeTab}
+                <div className="absolute top-3 left-14 lg:top-6 lg:left-20 px-2 py-1 w-5/6 bg-white z-10">
+                  <p className='text-body-md lg:text-body-lg text-dark font-body font-bold'>
+                    Invaca Investment Company S.A.C.A Class <span className="hidden lg:inline-block">{activeTab}</span>
                   </p>
                 </div>
                 
@@ -163,19 +163,19 @@ export function InvestorSection() {
             {/* Row 1: Estados Financieros */}
             <div className="sticky top-0">
               <div className="flex justify-between items-baseline mb-8">
-                <h3 className="text-2xl lg:text-3xl font-display font-medium text-dark">
+                <h3 className="text-3xl mt-8 lg:mt-0 font-display font-medium text-dark">
                   Últimos Estados Financieros
                 </h3>
               </div>
               
-              <div className="flex flex-row gap-3">
+              <div className="flex flex-col lg:flex-row gap-3">
                 {reports.slice(0, 2).map((report, index) => (
                   <div 
                     key={index}
                     className="relative flex flex-col items-start justify-between rounded-sm p-6 bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center border-b-2 border-dark-400 before:absolute before:bottom-[-2px] before:left-0 before:w-0 before:h-[2px] before:bg-accent-400 hover:before:w-full before:transition-all before:duration-500 before:ease-in-out group"
                   >
                     <div className='mb-10'>
-                      <p className="text-xl font-display font-normal text-white mb-2">{report.period}</p>
+                      <p className="text-2xl lg:text-xl font-display font-normal text-white mb-2">{report.period}</p>
                       <p className="text-body-sm text-white/60 max-w-[400px]">{report.title}.</p>
                     </div>
                     <a 
@@ -206,12 +206,12 @@ export function InvestorSection() {
 
             {/* Invierte en Invaca */}
             <div className="mt-8">
-              <h3 className="text-2xl lg:text-3xl !leading-tight font-display font-medium text-dark mb-2">
+              <h3 className="text-3xl !leading-tight font-display font-medium text-dark mb-2">
                 Invierta en Invaca Investment Company
               </h3>
-              <p className="text-body-sm text-slate/70 font-body mb-8">Contáctenos a través de una de las siguientes casas de bolsa:</p>
+              <p className="text-body-md lg:text-body-sm text-slate/70 font-body mb-8">Contáctenos a través de una de las siguientes casas de bolsa:</p>
               
-              <div className="grid grid-cols-5 gap-3">
+              <div className="grid grid-cols-3 lg:grid-cols-5 gap-3">
                 {marketHouses.map((house, index) => (
                   <Link 
                     key={index}

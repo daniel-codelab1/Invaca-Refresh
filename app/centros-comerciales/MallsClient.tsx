@@ -12,10 +12,16 @@ interface Mall {
   id: number
   name: string
   slug: string
+  title: string
   location: string
+  address: string
   image: string
   description: string
-  stats: { stores: string, footfall: string }
+  stats: { stores: string,
+    restaurants: string,
+    parkingSpots: string
+  }
+  performance: { annualVisitors: string }
 }
 
 const staggerContainer = {
@@ -35,19 +41,26 @@ export function MallsClient() {
   const [malls, setMalls] = useState<Mall[]>([])
 
   useEffect(() => {
-    getStrapiMedia('/api/malls?populate[0]=MainImage&populate[1]=Stats').then((res) => {
+    getStrapiMedia('/api/malls?populate[0]=MainImage&populate[1]=Stats&populate[2]=Performance').then((res) => {
       if (res && res.data) {
         const mapped = res.data.map((mall: any) => ({
           id: mall.id,
           name: mall.Name,
           slug: mall.Slug,
+          title: mall.Title,
+          address: mall.Address,
           location: mall.Location,
           image: mall.MainImage?.url ? `${STRAPI_BASE_URL}${mall.MainImage.url}` : '/images/assets/bg-ivc-4.jpg',
           description: mall.Description,
           stats: { 
-             stores: `+${mall.Stats?.Stores || 0} Marcas`, 
-             // Using Performance's Annual Visitors directly if footfall text doesn't exist to simulate it:
+             stores: mall.Stats?.Stores || 0, 
+             restaurants: mall.Stats?.Restaurants || 0,
+             parkingSpots: mall.Stats?.ParkingSpots || 0,
              footfall: mall.Performance?.AnnualVisitors || 'Alto Tráfico' 
+          },
+          performance: {
+            annualVisitors: mall.Performance?.AnnualVisitors || 'Alto Tráfico',
+            
           }
         }))
         setMalls(mapped)
@@ -58,7 +71,7 @@ export function MallsClient() {
   return (
     <>
       {/* 1. DISCOVERY & STORYTELLING NARRATIVE */}
-      <section className="py-24 md:py-28 overflow-hidden relative">
+      <section className="py-16 md:py-24 lg:py-28 overflow-hidden relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="flex flex-col lg:flex-row gap-16 items-center"
@@ -75,18 +88,18 @@ export function MallsClient() {
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-dark mb-8 leading-[1.1]">
                 Espacios diseñados para el éxito comercial.
               </h2>
-              <p className="text-body-lg text-slate-500 font-body font-light leading-relaxed mb-6">
+              <p className="text-body lg:text-body-lg text-slate font-body font-light leading-relaxed mb-4 lg:mb-6">
                 Invaca Investment Company opera y administra algunos de los destinos de retail más importantes y transitados de Venezuela. No construimos simples centros comerciales; desarrollamos ecosistemas de estilo de vida donde las mejores marcas convergen con experiencias inolvidables.
               </p>
-              <p className="text-body-lg text-slate-500 font-body font-light leading-relaxed">
+              <p className="text-body lg:text-body-lg text-slate font-body font-light leading-relaxed">
                 Nuestros espacios están concebidos bajo los más altos estándares de diseño arquitectónico, seguridad y tecnología, asegurando el máximo confort para nuestros visitantes y la mayor rentabilidad para nuestros aliados comerciales.
               </p>
             </motion.div>
 
             {/* Visual Right (Abstract Gallery/Metrics) */}
-            <motion.div className="w-full pl-0 lg:pl-12 lg:w-1/2 grid grid-cols-2 gap-4" variants={fadeUpVariant}>
+            <motion.div className="w-full pl-0 lg:pl-12 lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4" variants={fadeUpVariant}>
                <div className="space-y-4 flex flex-col items-end justify-center">
-                  <div className="bg-white w-10/12 border border-neutral-100 p-8 rounded-xs flex flex-col items-center justify-center text-center h-48 hover:-translate-y-1 transition-transform duration-300">
+                  <div className="bg-white w-full lg:w-10/12 border border-neutral-100 p-8 rounded-xs flex flex-col items-center justify-center text-center h-48 hover:-translate-y-1 transition-transform duration-300">
                      <span className="text-6xl font-body font-bold text-dark mb-2">3</span>
                      <span className="text-sm font-body font-semibold uppercase tracking-widest text-slate">Centros High End</span>
                   </div>
@@ -94,15 +107,15 @@ export function MallsClient() {
                      <Image src="/images/malls/fachada-tolon-1.jpg" alt="Interior Mall Vista" fill className="object-cover" />
                   </div>
                </div>
-               <div className="space-y-4 pt-12">
-                  <div className="relative h-64 rounded-xs overflow-hidden">
+               <div className="space-y-4 pt-0 lg:pt-12">
+                  <div className="relative h-96 lg:h-64 rounded-xs overflow-hidden">
                      <Image src="/images/malls/4938623117048261886.jpg" alt="Paseo el Hatillo Vista" fill className="object-cover" />
                   </div>
-                  <div className="bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center w-10/12 p-8 rounded-xs shadow-xl border border-neutral-800 flex flex-col items-center justify-center text-center h-48 hover:-translate-y-1 transition-transform duration-300">
+                  <div className="bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center w-full lg:w-10/12 p-8 rounded-xs shadow-xl border border-neutral-800 flex flex-col items-center justify-center text-center h-48 hover:-translate-y-1 transition-transform duration-300">
                      <span className="text-6xl font-body font-bold text-white mb-2">+40M</span>
                      <span className="text-sm font-body font-semibold uppercase tracking-widest text-cream-200">Visitas Anuales</span>
                   </div>
-                  <div className="relative h-48 rounded-xs overflow-hidden">
+                  <div className="relative h-96 lg:h-48 rounded-xs overflow-hidden">
                      <Image src="/images/malls/ccllanomall/8826667.jpg" alt="Paseo el Hatillo Vista" fill className="object-cover" />
                   </div>
                </div>
@@ -118,7 +131,7 @@ export function MallsClient() {
           
           <div className="mb-12 md:mb-20 text-center max-w-3xl mx-auto">
              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-dark font-medium mb-6">Nuestro Portafolio</h2>
-             <p className="text-body-lg text-slate-500 font-body font-light leading-relaxed mb-6">Explora las joyas de nuestro desarrollo comercial. Cada centro tiene una identidad única diseñada para su ubicación demográfica.</p>
+             <p className="text-body lg:text-body-lg text-slate font-body font-light leading-relaxed mb-6">Explora las joyas de nuestro desarrollo comercial. Cada centro tiene una identidad única diseñada para su ubicación demográfica.</p>
           </div>
 
           <motion.div 
@@ -170,25 +183,28 @@ export function MallsClient() {
                     </div>
                   </div>
                   
-                  <div className="p-8 flex flex-col flex-grow bg-white relative border border-neutral-100 overflow-hidden">
+                  <div className="py-8 px-4 lg:px-8 flex flex-col flex-grow bg-white relative border border-neutral-100 overflow-hidden">
                     <h3 className="text-3xl font-display font-medium mb-4 w-fit text-transparent bg-clip-text bg-gradient-to-r from-dark from-40% via-white/20 via-50% to-dark to-60% bg-[length:300%_100%] bg-right group-hover:bg-left transition-none group-hover:transition-all group-hover:duration-1000 group-hover:ease-in-out">
                       {mall.name}
                     </h3>
                     {/* Subtle Glow on active */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-accent/10 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-                    <p className="text-slate-500 mb-8 font-body leading-relaxed flex-grow relative z-10 text-body-sm">
-                      {mall.description}
+                    <p className="text-slate-500 mb-8 font-body leading-relaxed flex-grow relative z-10 text-body">
+                      {mall.title}
                     </p>
 
                     {/* Quick Stats Reveal */}
                     <div className="flex items-center justify-between border-t border-neutral-800/10 pt-6 mt-auto">
                        <div className="flex gap-6 text-sm font-body font-medium text-neutral-800">
                           <span className="flex flex-col">
-                             <span className="text-accent mb-1 group-hover:text-accent transition-colors">{mall.stats.stores}</span>
+                             <span className="text-accent mb-1 group-hover:text-accent transition-colors">{mall.stats.stores} Tiendas</span>
                           </span>
                           <span className="flex flex-col">
-                             <span className="text-accent mb-1 group-hover:text-accent transition-colors">{mall.stats.footfall}</span>
+                             <span className="text-accent mb-1 group-hover:text-accent transition-colors">{mall.stats.restaurants} Restaurantes</span>
+                          </span>
+                          <span className="flex flex-col">
+                             <span className="text-accent mb-1 group-hover:text-accent transition-colors">{mall.stats.parkingSpots} Puestos</span>
                           </span>
                        </div>
                        
@@ -210,7 +226,7 @@ export function MallsClient() {
          <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
          
          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-[transparent] rounded-sm p-10 md:p-20 relative overflow-hidden">
+            <div className="bg-[transparent] rounded-sm py-20 px-2 md:px-20 relative overflow-hidden">
                {/* Accent Bar */}
                {/* <div className="absolute top-0 left-0 w-1 h-full bg-accent" /> */}
                
@@ -223,7 +239,7 @@ export function MallsClient() {
                      <h2 className="text-3xl md:text-5xl font-display font-medium text-dark mb-6 leading-tight">
                         Lleva tu marca a los destinos más exclusivos.
                      </h2>
-                     <p className="text-body-sm lg:text-body-md text-slate-500 font-body mb-0">
+                     <p className="text-body lg:text-body-lg text-slate font-body font-light leading-relaxed mb-0">
                         Disponemos de locales comerciales de alto perfil, islas y espacios publicitarios en nuestros malls. Forma parte del portafolio más prestigioso del país y asegura el tráfico ideal para tu negocio.
                      </p>
                   </div>

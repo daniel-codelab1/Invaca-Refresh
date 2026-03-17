@@ -229,7 +229,7 @@ export default function EstacionamientosPage() {
     <div className="min-h-screen bg-white selection:bg-accent selection:text-white">
       
       {/* Hero Section */}
-      <section ref={heroRef} className="relative h-[70vh] md:h-[80vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden p-4">
+      <section ref={heroRef} className="relative h-[65vh] md:h-[80vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden p-4">
         {/* Background Image with Overlay & Parallax */}
         <motion.div 
           className="absolute inset-0 z-0 bg-dark"
@@ -248,7 +248,7 @@ export default function EstacionamientosPage() {
         </motion.div>
 
         <motion.div 
-          className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-20"
+          className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-0 lg:mt-20"
           style={{ opacity: heroOpacity }}
         >
           <motion.div
@@ -277,7 +277,7 @@ export default function EstacionamientosPage() {
           <div className="mb-8 md:mb-12 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
              <span className="text-accent font-bold tracking-widest uppercase text-sm mb-6 block">Administración</span>
              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-dark font-medium mb-8">Estacionamientos Operados</h2>
-             <p className="text-body-lg text-slate-500 max-w-2xl mx-auto font-body font-light leading-relaxed mb-6">Explora nuestra red de aparcamientos operados con los más altos estándares de calidad, seguridad y tecnología inteligente.</p>
+             <p className="text-body lg:text-body-lg text-slate max-w-2xl mx-auto font-body font-light leading-relaxed mb-6">Explora nuestra red de aparcamientos operados con los más altos estándares de calidad, seguridad y tecnología inteligente.</p>
           </div>
 
           <div className="relative w-full group py-8">
@@ -309,7 +309,7 @@ export default function EstacionamientosPage() {
               onMouseMove={handleMouseMove}
               onTouchStart={() => setIsAutoPlaying(false)}
               onTouchEnd={() => setIsAutoPlaying(true)}
-              className={`flex overflow-x-auto hide-scrollbar gap-3 md:gap-4 px-4 md:px-[5vw] lg:px-[10vw] items-stretch h-[500px] md:h-[600px] ${isDragging ? "snap-none cursor-grabbing" : "snap-x snap-mandatory cursor-grab"}`}
+              className={`flex overflow-x-auto hide-scrollbar gap-3 md:gap-4 px-4 md:px-[5vw] lg:px-[10vw] items-stretch h-[580px] md:h-[600px] ${isDragging ? "snap-none cursor-grabbing" : "snap-x snap-mandatory cursor-grab"}`}
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
             >
               <style jsx>{`
@@ -352,12 +352,12 @@ export default function EstacionamientosPage() {
                         </span>
                       </div>
                       
-                      <h3 className="text-3xl md:text-4xl lg:text-6xl font-display font-medium text-white mb-6 !leading-[1.15em] max-w-lg">
+                      <h3 className="text-3xl md:text-4xl lg:text-6xl font-display font-medium text-white mb-6 leading-[1.3em] lg:!leading-[1.15em] max-w-lg">
                         {parking.name}
                       </h3>
                       
-                      <div className="flex items-center mt-4">
-                        <div className="bg-dark text-white border-l-4 border-accent px-6 py-4 rounded-xs font-body font-medium uppercase text-sm tracking-wider flex items-center hover:bg-accent hover:text-white transition-colors group-hover/card:shadow-lg">
+                      <div className="hidden lg:flex items-center mt-4">
+                        <div className="bg-dark text-white border-l-2 border-accent px-6 py-4 rounded-xs font-body font-medium uppercase text-sm tracking-wider flex items-center hover:bg-accent hover:text-white transition-colors group-hover/card:shadow-lg">
                           Visitar Centro Comercial
                           <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                         </div>
@@ -389,15 +389,15 @@ export default function EstacionamientosPage() {
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-dark mb-8 leading-[1.1]">
                 Comodidad y seguridad integral.
               </h2>
-              <p className="text-body-lg text-slate-500 font-body font-light leading-relaxed mb-6">
-                En INVACA, desarrollamos y administramos soluciones de movilidad automotriz que elevan la experiencia de nuestros visitantes desde el momento en que llegan. Nuestra red de estacionamientos está diseñada para maximizar el confort, optimizando tiempos e integrando lo último en tecnología de gestión inteligente.
+              <p className="text-body lg:text-body-lg text-slate text-left font-body font-light leading-relaxed mb-6">
+                En Invaca Investment Company, desarrollamos y administramos soluciones de movilidad automotriz que elevan la experiencia de nuestros visitantes desde el momento en que llegan. Nuestra red de estacionamientos está diseñada para maximizar el confort, optimizando tiempos e integrando lo último en tecnología de gestión inteligente.
               </p>
             </motion.div>
 
             {/* Visual Right (Metrics) */}
-            <motion.div className="w-full pl-0 lg:pl-12 lg:w-1/2 grid grid-cols-2 gap-4" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
+            <motion.div className="w-full pl-0 lg:pl-12 lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
                <div className="space-y-4 flex flex-col items-end justify-center">
-                  <div className="bg-white backdrop-blur-md w-11/12 p-8 rounded-xs flex flex-col items-center justify-center text-center h-48 hover:-translate-y-1 transition-transform duration-300 border border-white/10">
+                  <div className="bg-white backdrop-blur-md w-full lg:w-11/12 p-8 rounded-xs flex flex-col items-center justify-center text-center h-48 hover:-translate-y-1 transition-transform duration-300 border border-slate lg:border-white/10">
                      <span className="text-6xl font-body font-bold text-dark mb-2"><Counter value={3} /></span>
                      <span className="text-xs font-body font-semibold uppercase tracking-widest text-dark">Parkings Operados</span>
                   </div>
@@ -406,7 +406,7 @@ export default function EstacionamientosPage() {
                      <span className="text-xs font-body font-semibold uppercase tracking-widest text-white/90">Puestos Totales</span>
                   </div>
                </div>
-               <div className="space-y-4 pt-12">
+               <div className="space-y-4 pt-0 lg:pt-12">
                   <div className="bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center w-full p-8 rounded-xs border border-neutral-800 flex flex-col items-center justify-center text-center h-56 hover:-translate-y-1 transition-transform duration-300">
                      <span className="text-6xl font-body font-bold text-white mb-2"><Counter value={2.5} suffix="M" formatOptions={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }} /></span>
                      <span className="text-xs font-body font-semibold uppercase tracking-widest text-cream-200">Ocupación Anual</span>
@@ -418,7 +418,7 @@ export default function EstacionamientosPage() {
       </section>
 
       {/* 4. Intro Note (moved down below Features) */}
-      <section className="pb-24 lg:pb-36 pt-8 lg:pt-16 bg-white">
+      <section className="pb-24 lg:pb-36 pt-0 md:pt-8 lg:pt-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto text-center mt-12">
             <motion.h2
@@ -426,7 +426,7 @@ export default function EstacionamientosPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative inline-block text-2xl md:text-3xl lg:text-5xl border-2 border-dark-800 p-10 md:p-20 font-display font-medium text-dark !leading-[3rem] before:absolute before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white"
+              className="relative inline-block text-3xl lg:text-5xl border-2 border-dark-800 p-10 md:p-20 font-display font-medium text-dark leading-tight lg:!leading-[3rem] before:absolute before:bottom-[-3px] lg:before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white"
             >
               Los estacionamientos operados por Invaca mantienen la calidad, modernidad, seguridad y funcionalidad que nos caracteriza con excelente atención y servicio.
             </motion.h2>

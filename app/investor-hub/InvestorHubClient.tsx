@@ -32,7 +32,7 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
   return (
     <>
       {/* SECTION 1: Market Data (Split-Screen Editorial) */}
-      <section className="py-24 md:py-32 bg-white">
+      <section className="py-16 md:py-24 lg:py-32 bg-white">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex relative flex-col lg:flex-row gap-16 items-start">
             
@@ -47,7 +47,7 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-dark mb-6 leading-[1.1]">
                   Valor sostenido a través del <span className="text-accent italic">tiempo</span>
                 </h2>
-                <p className="text-lg text-slate font-body font-light mb-8 max-w-lg">
+                <p className="text-body lg:text-body-lg text-slate font-body font-light mb-8 max-w-lg">
                   Nuestra presencia consolidada en la Bolsa de Valores de Caracas refleja décadas de gestión estratégica y crecimiento constante. Monitoree el desempeño en tiempo real de nuestras acciones Clase A y B.
                 </p>
                 
@@ -73,7 +73,7 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
             >
-              <div className="grid sm:grid-cols-2 gap-6 relative z-10">
+              <div className="bg-white grid sm:grid-cols-2 gap-6 relative z-10">
                 {tickerData.map((ticker: any) => (
                   <motion.div key={ticker.symbol} variants={slideInRight}>
                     <TickerCard {...ticker} />
@@ -83,7 +83,7 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
 
               {/* Chart Panoramic */}
                <motion.div variants={fadeSlideUp} className="bg-white rounded-xs border border-cream-100 h-[500px] flex flex-col relative z-0">
-                  <div className="absolute top-6 left-4 w-14 h-14 rounded-full overflow-hidden bg-slate-900 p-2 flex items-center justify-center z-10">
+                  <div className="absolute top-2 md:top-6 left-3 md:left-4 w-10 h-10 md:w-14 md:h-14 rounded-full overflow-hidden bg-slate-900 p-2 flex items-center justify-center z-10">
                     <Image
                       src="/logos/LogotipoInvacaNegativo.png"
                       alt="INVACA Investment Company"
@@ -93,8 +93,8 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
                       priority
                     />
                   </div>
-                  <div className="absolute top-3 left-20 px-2 py-1 w-5/6 bg-white z-10">
-                    <p className='text-body-lg text-dark font-body font-bold'>
+                  <div className="absolute top-2 left-14 md:left-20 px-2 py-0 md:py-1 w-10/12 md:w-5/6 bg-white z-10">
+                    <p className='text-body-md md:text-body-lg text-dark font-body font-bold'>
                       Invaca Investment Company S.A.C.A Class A
                     </p>
                   </div>
@@ -124,7 +124,7 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
             <h2 className="text-4xl md:text-5xl lg:text-6xl text-dark font-display font-medium mb-6">
               Estados Financieros Consolidados
             </h2>
-            <p className="text-body-lg text-slate font-body font-light">
+            <p className="text-body md:text-body-lg text-slate font-body font-light">
               Respaldamos la confianza de nuestros inversionistas con un reporte riguroso y periódico de nuestra rentabilidad y solidez estructural.
             </p>
           </motion.div>
@@ -140,7 +140,7 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
              <FinancialDocList documents={financialDocs} className="col-span-1 md:col-span-2 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6" />
           </motion.div>
 
-          <motion.div 
+          {/* <motion.div 
             className="mt-12 flex justify-end"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -149,12 +149,12 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
              <Link href="#" className="inline-flex items-center text-accent hover:text-dark font-body-lg font-medium tracking-wide transition-colors duration-300">
                 Ver Archivo Histórico Completo <ArrowRight className="ml-2 w-5 h-5" />
              </Link>
-          </motion.div>
+          </motion.div> */}
         </div>
       </section>
 
       {/* SECTION 3: Governance & Contact */}
-      <section className="py-24 md:py-32 bg-white relative">
+      <section className="py-16 md:py-24 lg:py-32 bg-white relative">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             
@@ -170,16 +170,16 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-dark mb-4">
                   Asambleas de Accionistas
                 </h2>
-                <p className="text-lg text-slate font-body font-light">
+                <p className="text-body md:text-body-lg text-slate font-body font-light">
                   Participación activa y democrática en las decisiones fundamentales.
                 </p>
               </div>
               
               <motion.div variants={fadeSlideUp} className="bg-white rounded-xs border border-neutral-100 overflow-hidden">
-                <div className="p-8 border-b border-neutral-100 bg-white">
+                <div className="p-2 md:p-8 border-b border-neutral-100 bg-white">
                    <h3 className="text-2xl font-display font-medium text-dark">Últimas Convocatorias de Asambleas</h3>
                 </div>
-                <div className="p-8">
+                <div className="p-2 md:p-8">
                    <AssemblyCallList calls={assemblyCalls} />
                 </div>
               </motion.div>
@@ -194,15 +194,15 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
               variants={fadeSlideUp}
             >
               <div className="sticky top-24">
-                <div className="bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center text-white p-10 rounded-xs relative overflow-hidden group">
+                <div className="bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center text-white px-6 md:px-10 py-12 rounded-xs relative overflow-hidden group">
                   
-                  <h3 className="text-3xl font-display font-medium mb-2 relative z-10">Contacto para Inversionistas</h3>
+                  <h3 className="text-3xl font-display font-medium mb-4 md:mb-2 relative z-10">Contacto para Inversionistas</h3>
                   <p className="text-cream-100/70 font-body font-light mb-10 relative z-10">Nuestro equipo de Relaciones con Inversionistas está a su entera disposición.</p>
                   
                   <div className="space-y-10 relative z-10">
                     <div className="flex items-start group/item">
                       <div className="bg-white/10 p-3 rounded-full mr-4 text-white transition-colors duration-300 group-hover/item:bg-accent group-hover/item:text-white shrink-0">
-                        <Building className="w-6 h-6" />
+                        <Building className="w-4 h-4 md:w-6 md:h-6" />
                       </div>
                       <div>
                         <p className="font-body font-semibold text-white tracking-wide uppercase text-xs mb-1">Oficina Principal</p>
@@ -212,7 +212,7 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
                     
                     <div className="flex items-center group/item">
                       <div className="bg-white/10 p-3 rounded-full mr-4 text-white transition-colors duration-300 group-hover/item:bg-accent group-hover/item:text-white shrink-0">
-                        <Phone className="w-6 h-6" />
+                        <Phone className="w-4 h-4 md:w-6 md:h-6" />
                       </div>
                       <div>
                         <p className="font-body font-semibold text-white tracking-wide uppercase text-xs mb-1">Teléfonos directos</p>
@@ -222,7 +222,7 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
                     
                     <div className="flex items-center group/item">
                       <div className="bg-white/10 p-3 rounded-full mr-4 text-white transition-colors duration-300 group-hover/item:bg-accent group-hover/item:text-white shrink-0">
-                        <Mail className="w-6 h-6" />
+                        <Mail className="w-4 h-4 md:w-6 md:h-6" />
                       </div>
                       <div>
                         <p className="font-body font-semibold text-white tracking-wide uppercase text-xs mb-1">Correo Electrónico</p>

@@ -45,7 +45,7 @@ export default function OtrosActivosPage() {
     <div className="min-h-screen bg-white selection:bg-accent selection:text-white">
       
       {/* 1. Hero Section */}
-      <section className="relative h-[70vh] md:h-[80vh] min-h-[600px] w-full flex items-center justify-center p-4 overflow-hidden">
+      <section className="relative h-[65vh] md:h-[80vh] min-h-[600px] w-full flex items-center justify-center p-4 overflow-hidden">
         {/* Background Image Setup */}
         <div className="absolute inset-0 z-0 bg-dark">
           <Image
@@ -58,7 +58,7 @@ export default function OtrosActivosPage() {
           <div className="absolute inset-0 bg-dark/70 mix-blend-multiply" />
         </div>
 
-        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-20">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-0 md:mt-20">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}

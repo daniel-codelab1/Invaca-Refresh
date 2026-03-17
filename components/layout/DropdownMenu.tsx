@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { ArrowUpRight, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const dropdownItems = [
   {
@@ -31,7 +32,12 @@ const dropdownItems = [
   },
 ]
 
-export function DropdownMenu() {
+interface DropdownMenuProps {
+  mobile?: boolean
+  onClose?: () => void
+}
+
+export function DropdownMenu({ mobile = false, onClose }: DropdownMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [hoveredItem, setHoveredItem] = useState<number | null>(null)
   const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null)
@@ -58,6 +64,55 @@ export function DropdownMenu() {
       setIsOpen(false)
     }, 200) // Delay para permitir movimiento del mouse del trigger al dropdown
     setCloseTimeout(timeout)
+  }
+
+  if (mobile) {
+    return (
+      <div className="flex flex-col w-full">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={cn(
+            'flex items-center justify-between py-2 text-base font-body uppercase font-bold tracking-wider transition-colors w-full',
+            isActive ? 'text-accent' : 'text-gray-700 hover:text-accent'
+          )}
+        >
+          Nuestros Activos
+          <ChevronDown className={cn('h-5 w-5 transition-transform duration-200', isOpen && 'rotate-180')} />
+        </button>
+        <AnimatePresence initial={false}>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+              className="overflow-hidden"
+            >
+              <div className="flex flex-col pl-4 mt-4 space-y-4 border-l-2 border-cream-200 mb-2">
+                {dropdownItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => {
+                      setIsOpen(false)
+                      if (onClose) onClose()
+                    }}
+                    className={cn(
+                      'block text-sm font-body uppercase tracking-widest transition-colors',
+                      pathname === item.href || pathname.startsWith(item.href + '/')
+                        ? 'text-accent font-bold'
+                        : 'text-slate-500 hover:text-dark'
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    )
   }
 
   return (
@@ -104,7 +159,10 @@ export function DropdownMenu() {
                       key={item.href}
                       href={item.href}
                       onMouseEnter={() => setHoveredItem(index)}
-                      onClick={() => setIsOpen(false)}
+                      onClick={() => {
+                        setIsOpen(false)
+                        if (onClose) onClose()
+                      }}
                       className={cn(
                         'block py-3 transition-all duration-300',
                         isHovered || itemIsActive ? 'border-b border-dark' : 'border-b border-transparent'
@@ -151,7 +209,10 @@ export function DropdownMenu() {
               {/* Link */}
               <Link
                 href={currentPreview.href}
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false)
+                  if (onClose) onClose()
+                }}
                 className="inline-flex items-center text-body-sm font-body font-semibold uppercase tracking-wider text-accent hover:text-accent-600 transition-colors group self-start"
               >
                 Saber más

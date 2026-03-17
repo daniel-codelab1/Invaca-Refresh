@@ -61,7 +61,7 @@ export function Hero() {
 
   const currentHero = slides[currentIndex]
 
-  if (!currentHero) return <div className="w-full h-[91vh] min-h-[700px] bg-dark animate-pulse" />
+  if (!currentHero) return <div className="w-full h-[85vh] lg:h-[91vh] min-h-[500px] lg:min-h-[700px] bg-dark animate-pulse" />
 
   const variants = {
     enter: (direction: number) => ({
@@ -81,7 +81,7 @@ export function Hero() {
   }
 
   return (
-    <section className="relative w-full h-[91vh] min-h-[700px]">
+    <section className="relative w-full h-[85vh] lg:h-[91vh] min-h-[500px] lg:min-h-[700px]">
       <div className="relative w-full h-full overflow-hidden">
         {/* Background Images with Transitions */}
         <AnimatePresence initial={false} custom={direction}>
@@ -121,7 +121,7 @@ export function Hero() {
             transition={{ duration: 0.5 }}
             className="max-w-5xl"
           >
-            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-display text-white mb-6 leading-normal tracking-tight">
+            <h1 className="text-4xl md:text-4xl lg:text-5xl xl:text-7xl font-display text-white mb-6 leading-tight lg:leading-normal tracking-tight">
               {currentHero.title}
             </h1>
             <p className="text-base md:text-base lg:text-lg xl:text-xl text-white max-w-3xl mx-auto font-body leading-relaxed">
@@ -139,13 +139,13 @@ export function Hero() {
           </motion.div>
 
           {/* Info Elements - Bottom Left */}
-          <div className="absolute bottom-12 left-12 text-white/80 text-body-sm font-body">
+          <div className="absolute bottom-24 left-0 lg:bottom-12 lg:left-12 w-full lg:w-auto text-white/80 text-body-sm font-body">
             <p>Cotizando desde 1955 en la</p>
             <p>Bolsa de Valores de Caracas</p>
           </div>
 
           {/* Social Links - Bottom Right */}
-          <div className="absolute bottom-12 right-12 flex flex-row gap-6">
+          <div className="hidden lg:flex lg:absolute bottom-12 right-12 flex-row gap-6">
             <a
               href="#"
               className="flex items-center text-body-sm text-white hover:text-sky transition-colors font-body"
@@ -176,14 +176,14 @@ export function Hero() {
         {/* Navigation Arrows */}
         <button
           onClick={goToPrevious}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-colors backdrop-blur-sm"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white hidden lg:flex items-center justify-center transition-colors backdrop-blur-sm"
           aria-label="Slide anterior"
         >
           <ChevronLeft className="h-6 w-6" />
         </button>
         <button
           onClick={goToNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-colors backdrop-blur-sm"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white hidden lg:flex items-center justify-center transition-colors backdrop-blur-sm"
           aria-label="Slide siguiente"
         >
           <ChevronRight className="h-6 w-6" />

@@ -111,17 +111,17 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
 
 export function UrbanProjects() {
   return (
-    <section className="py-24">
+    <section className="py-0 md:py-12 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6">
         
         {/* Header Text */}
-        <div className="max-w-5xl mx-auto text-center mt-12 mb-56">
+        <div className="max-w-5xl mx-auto text-center mt-12 mb-32 lg:mb-56">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative text-2xl md:text-3xl lg:text-5xl border-2 border-dark-800 p-20 font-display font-medium text-dark leading-relaxed before:absolute before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white"
+            className="relative text-3xl lg:text-5xl border-2 border-dark-800 p-10 lg:p-20 font-display font-medium text-dark leading-relaxed before:absolute before:bottom-[-3px] lg:before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white"
           >
             Desde 1925, hemos liderado procesos de modernización urbana, desarrollando proyectos que han definido el paisaje urbano de Caracas.
           </motion.h2>

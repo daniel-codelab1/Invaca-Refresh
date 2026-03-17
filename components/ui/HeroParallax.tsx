@@ -23,7 +23,7 @@ export function HeroParallax({ imageSrc, imageAlt, badgeText, title, subtitle }:
   const heroOpacity = useTransform(heroScrollY, [0, 1], [1, 0])
 
   return (
-    <section ref={heroRef} className="relative h-[70vh] md:h-[80vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden p-4">
+    <section ref={heroRef} className="relative h-[65vh] md:h-[80vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden p-4">
       <motion.div 
         className="absolute inset-0 z-0 bg-dark"
         style={{ y: heroY }}
@@ -41,7 +41,7 @@ export function HeroParallax({ imageSrc, imageAlt, badgeText, title, subtitle }:
       </motion.div>
 
       <motion.div 
-        className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-20"
+        className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center text-white mt-0 lg:mt-20"
         style={{ opacity: heroOpacity }}
       >
         <motion.div

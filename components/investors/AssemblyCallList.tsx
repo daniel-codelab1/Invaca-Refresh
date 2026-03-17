@@ -19,14 +19,14 @@ export function AssemblyCallList({ calls }: AssemblyCallListProps) {
       {calls.map((call, index) => (
         <div 
           key={index} 
-          className="bg-white p-6 rounded-xs border border-neutral-200 transition-all duration-500 relative overflow-hidden group hover:border-accent/30"
+          className="bg-white px-6 py-6 rounded-xs border border-neutral-200 transition-all duration-500 relative overflow-hidden group hover:border-accent/30"
         >
            {/* Left Accent Strip */}
            <div className="absolute top-0 left-0 w-0 h-full bg-gradient-to-b from-accent to-accent-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
            
-           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pl-2">
+           <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-6 pl-0 md:pl-2">
              <div className="flex-1">
-               <div className="flex flex-wrap gap-3 mb-4">
+               <div className="flex flex-wrap gap-3 mb-6 md:mb-4">
                  <span className={`inline-flex items-center px-3 py-1 rounded-xs text-xs font-semibold tracking-wide ${
                     call.type === 'Ordinaria' ? 'bg-dark-700 text-dark-50' : 'bg-accent-500 text-accent-50'
                  }`}>
@@ -44,7 +44,7 @@ export function AssemblyCallList({ calls }: AssemblyCallListProps) {
                </h3>
              </div>
              
-             <div className="flex-shrink-0 w-full md:w-auto mt-2 md:mt-0">
+             <div className="flex-shrink-0 w-full md:w-auto mt-0">
                <a 
                  href={call.file}
                  download

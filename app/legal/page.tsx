@@ -11,7 +11,7 @@ export default function LegalPage() {
       <div className="container mx-auto px-4 md:px-8 max-w-4xl">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium mb-12">Aviso Legal</h1>
         
-        <div className="space-y-8 font-body font-light text-slate-500 leading-relaxed text-lg">
+        <div className="space-y-8 font-body font-light text-slate/80 leading-relaxed text-lg">
           <p>
             Última actualización: {new Date().toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}
           </p>

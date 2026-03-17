@@ -82,13 +82,13 @@ export function NewsSection() {
         {/* Header con título y botones de navegación */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-20">
           <div>
-            <h2 className="text-3xl md:text-6xl font-display font-medium text-dark tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-display text-center md:text-left font-medium text-dark tracking-tight">
               Últimas Noticias
             </h2>
           </div>
           
           {/* Botones de navegación */}
-          <div className="flex items-center gap-4 mt-6 md:mt-0">
+          <div className="flex flex-wrap lg:flex-nowrap justify-center lg:justify-end items-center gap-4 mt-10 md:mt-0">
             <button
               onClick={scrollPrev}
               className="w-14 h-14 flex items-center justify-center border border-dark/20 hover:bg-dark hover:text-white transition-all duration-300"

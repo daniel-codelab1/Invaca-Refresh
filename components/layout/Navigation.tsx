@@ -8,6 +8,7 @@ import { AboutDropdown } from './AboutDropdown'
 
 interface NavigationProps {
   mobile?: boolean
+  onClose?: () => void
 }
 
 // Ítems simples (sin dropdowns)
@@ -16,7 +17,7 @@ const navItems = [
   { href: '/noticias', label: 'Noticias' },
 ]
 
-export function Navigation({ mobile = false }: NavigationProps) {
+export function Navigation({ mobile = false, onClose }: NavigationProps) {
   const pathname = usePathname()
 
   const baseLinkClasses = 'font-body uppercase tracking-wider font-bold transition-colors'
@@ -27,6 +28,7 @@ export function Navigation({ mobile = false }: NavigationProps) {
       {/* Inicio - siempre primero */}
       <Link
         href="/"
+        onClick={onClose}
         className={cn(
           baseLinkClasses,
           pathname === '/'
@@ -39,16 +41,17 @@ export function Navigation({ mobile = false }: NavigationProps) {
       </Link>
 
       {/* Quiénes Somos + Dropdown de Gobernanza */}
-      <AboutDropdown mobile={mobile} />
+      <AboutDropdown mobile={mobile} onClose={onClose} />
 
       {/* Nuestra Oferta - Dropdown de activos */}
-      <DropdownMenu />
+      <DropdownMenu mobile={mobile} onClose={onClose} />
 
       {/* Resto de enlaces simples */}
       {navItems.map((item) => (
         <Link
           key={item.href}
           href={item.href}
+          onClick={onClose}
           className={cn(
             baseLinkClasses,
             pathname === item.href

@@ -109,7 +109,7 @@ const BrandSlot = ({ brand, index }: { brand: { name: string, image?: string }, 
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.5 }}
-          className="absolute inset-0 flex items-center justify-center p-4"
+          className="absolute inset-0 border border-cream-200 flex items-center justify-center p-1 md:p-2 lg:p-4"
         >
           {brand.image ? (
             <img 
@@ -224,13 +224,13 @@ export function MallDetailView({ mall }: { mall: MallData }) {
     <div className="min-h-screen">
       
       {/* 1. Hero Section (Video) */}
-      <section className="relative h-[85vh] min-h-[600px] overflow-hidden">
+      <section className="relative h-[100dvh] md:h-[85vh] min-h-[600px] overflow-x-hidden overflow-y-hidden md:overflow-hidden">
         {/* Same Hero Implementation */}
         <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="absolute inset-0 w-full h-full"
+            className="absolute inset-0 w-full h-[75dvh] md:h-full"
         >
             <video
               autoPlay
@@ -249,7 +249,7 @@ export function MallDetailView({ mall }: { mall: MallData }) {
              initial={{ opacity: 0, x: -20 }}
              animate={{ opacity: 1, x: 0 }}
              transition={{ delay: 0.5, duration: 0.5 }}
-             className="absolute top-24 left-16 container mx-auto px-4 sm:px-6 lg:px-8"
+             className="absolute top-12 left-8 lg:top-24 lg:left-16 container mx-auto px-4 sm:px-6 lg:px-8"
            >
               <Link
               href="/centros-comerciales" 
@@ -279,8 +279,8 @@ export function MallDetailView({ mall }: { mall: MallData }) {
                 {mall.location}
               </motion.div>
            </div>
-          <div className="relative z-10 ml-auto mr-0 w-full pl-24">
-            <FadeIn className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-cream-200 bg-white shadow-xl rounded-sm -translate-y-12 md:-translate-y-24 overflow-hidden relative">
+          <div className="relative z-10 ml-auto mr-0 w-full pl-0 md:pl-24">
+            <FadeIn className="grid grid-cols-2 md:grid-cols-4 divide-y divide-x divide-cream-200 bg-white shadow-none lg:shadow-xl rounded-sm -translate-y-12 md:-translate-y-24 overflow-hidden relative">
                 <div className="py-12 px-8 text-center bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center text-white flex flex-col justify-center">
                   <p className="text-xs uppercase tracking-widest font-semibold opacity-80 mb-2">Área Comercial</p>
                   <p className="text-3xl md:text-4xl lg:text-5xl font-body font-bold">
@@ -310,13 +310,8 @@ export function MallDetailView({ mall }: { mall: MallData }) {
         </div>
       </section>
 
-      {/* 2. Primary Stats Section */}
-      <section className="bg-white py-12 md:py-0 border-b border-cream-200 relative z-20 -mt-0">
-        
-      </section>
-
       {/* 3. Description & Managers Section */}
-      <section className="py-20 lg:py-28 bg-white">
+      <section className="py-20 lg:py-28 border-t border-cream-200 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
             {/* Description */}
@@ -325,7 +320,7 @@ export function MallDetailView({ mall }: { mall: MallData }) {
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-medium text-dark mb-8 leading-tight">
                     {mall.title}
                   </h2>
-                  <p className="text-body-sm lg:text-body text-slate-500 font-body leading-relaxed text-justify mb-12">
+                  <p className="text-body text-slate font-body leading-relaxed text-justify mb-12">
                     {mall.description}
                   </p>
                   
@@ -334,18 +329,18 @@ export function MallDetailView({ mall }: { mall: MallData }) {
                         <div className="bg-white w-16 h-16 flex items-center justify-center p-3 rounded-xs mr-4 text-dark shadow-sm">
                           <Clock className="h-6 w-6" />
                         </div>
-                        <div>
-                          <h4 className="font-display font-semibold text-dark mb-1">Horarios</h4>
-                          <p className="text-slate-500 font-body text-sm">{mall.contact.openingHours}</p>
+                        <div className="flex-1">
+                          <h4 className="font-display text-body-lg text-dark mb-1">Horarios</h4>
+                          <p className="text-slate-500 font-body text-body-md">{mall.contact.openingHours}</p>
                         </div>
                       </div>
                       <div className="flex items-center">
                         <div className="bg-white w-16 h-16 flex items-center justify-center p-3 rounded-xs mr-4 text-dark shadow-sm">
                           <MapPin className="h-6 w-6" />
                         </div>
-                        <div>
-                          <h4 className="font-display font-semibold text-dark mb-1">Ubicación</h4>
-                          <p className="text-slate-500 font-body text-sm">{mall.address}</p>
+                        <div className="flex-1">
+                          <h4 className="font-display text-body-lg text-dark mb-1">Ubicación</h4>
+                          <p className="text-slate-500 font-body text-body-md">{mall.address}</p>
                         </div>
                       </div>
                   </div>
@@ -367,11 +362,11 @@ export function MallDetailView({ mall }: { mall: MallData }) {
             {/* Managers Cards */}
             <div className="lg:col-span-5 space-y-6">
                 <FadeIn delay={0.2}>
-                    <h3 className="text-2xl lg:text-3xl font-display font-medium text-dark mb-6">Equipo Directivo</h3>
+                    <h3 className="text-3xl font-display font-medium text-dark mb-6">Equipo Directivo</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {mall.managers.map((manager, index) => (
-                      <div key={index} className="bg-white min-h-64 p-6 rounded-xs border-b-2 border-dark flex flex-col items-center justify-center hover:border-accent transition-colors mb-4">
-                          <div className="relative h-16 w-16 flex-shrink-0 mb-6 rounded-full overflow-hidden bg-gray-200">
+                      <div key={index} className="bg-white min-h-64 p-6 rounded-xs border border-cream-200 border-b-2 border-b-slate flex flex-col items-center justify-center hover:border-accent transition-colors mb-4">
+                          <div className="relative h-32 w-32 flex-shrink-0 mb-6 rounded-full overflow-hidden bg-gray-200">
                             {manager.image ? (
                               <img src={manager.image} alt={manager.name} className="object-cover w-full h-full" />
                             ) : (
@@ -381,9 +376,9 @@ export function MallDetailView({ mall }: { mall: MallData }) {
                             )}
                           </div>
                           <div className="text-center">
-                            <p className="text-xs text-accent font-bold uppercase tracking-wider mb-1">{manager.role}</p>
-                            <h4 className="text-lg font-display font-medium text-dark">{manager.name}</h4>
-                            <a href={`mailto:${manager.email}`} className="text-sm text-slate-500 hover:text-dark transition-colors font-body mt-1 block">
+                            <p className="text-body-sm text-accent font-bold uppercase tracking-wider mb-1">{manager.role}</p>
+                            <h4 className="text-body-lg font-display font-medium text-dark">{manager.name}</h4>
+                            <a href={`mailto:${manager.email}`} className="text-body-sm text-slate-500 hover:text-dark transition-colors font-body mt-1 block">
                               {manager.email}
                             </a>
                           </div>
@@ -469,16 +464,16 @@ export function MallDetailView({ mall }: { mall: MallData }) {
                     <h2 className="text-3xl md:text-5xl font-display font-medium w-full lg:w-9/12 text-dark mb-6">
                       Las mejores marcas en un solo lugar
                     </h2>
-                    <p className="text-body-sm lg:text-body text-slate-500 font-body w-full lg:w-10/12 leading-relaxed mb-12">
+                    <p className="text-body-sm lg:text-body text-slate-500 font-body w-full lg:w-10/12 leading-relaxed mb-0 md:mb-12">
                       Disfruta de una selección curada de marcas nacionales e internacionales. Moda, tecnología, hogar y mucho más, todo pensado para brindarte la mejor experiencia de compra.
                     </p>
-                    <Link 
+                    {/* <Link 
                       href="#" 
                       className="inline-flex items-center px-8 h-14 bg-dark text-white font-body font-semibold text-body tracking-wide hover:bg-accent transition-colors duration-300"
                     >
                       Ver todas las marcas
                       <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    </Link>
+                    </Link> */}
                  </FadeIn>
 
                  {/* Right Column: Animated Grid */}
