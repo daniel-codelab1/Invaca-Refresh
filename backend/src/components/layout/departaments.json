@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_layout_departaments",
+  "info": {
+    "displayName": "Departaments"
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "PhoneText": {
+      "type": "string"
+    },
+    "PhoneLink": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "email"
+    }
+  },
+  "config": {}
+}

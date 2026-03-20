@@ -79,8 +79,8 @@ export function InvestorSection() {
           <h2 className="text-3xl md:text-4xl lg:text-6xl text-center font-display font-normal text-dark mb-6 tracking-tight leading-tight lg:!leading-[4rem]">
             Consolidados en el Mercado de Capitales
           </h2>
-          <p className="text-body-md text-slate-500 font-body leading-relaxed text-center">
-            Invaca cotiza en la Bolsa de Valores de Caracas desde 1955. Conozca nuestras acciones:
+          <p className="text-body-md text-slate-500 font-body leading-relaxed text-center max-w-2xl mx-auto">
+            Invaca cotiza en la Bolsa de Valores de Caracas desde 1955 (IVC.A / IVC.B). Consulte la información de mercado y descargue los estados financieros publicados.
           </p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
@@ -136,7 +136,7 @@ export function InvestorSection() {
                     priority
                   />
                 </div>
-                <div className="absolute top-3 left-14 lg:top-6 lg:left-20 px-2 py-1 w-5/6 bg-white z-10">
+                <div className="absolute top-3 left-14 lg:top-4 lg:left-20 px-2 py-1 w-5/6 bg-white z-10">
                   <p className='text-body-md lg:text-body-lg text-dark font-body font-bold'>
                     Invaca Investment Company S.A.C.A Class <span className="hidden lg:inline-block">{activeTab}</span>
                   </p>
@@ -207,16 +207,16 @@ export function InvestorSection() {
             {/* Invierte en Invaca */}
             <div className="mt-8">
               <h3 className="text-3xl !leading-tight font-display font-medium text-dark mb-2">
-                Invierta en Invaca Investment Company
+                Cómo acceder a nuestras acciones
               </h3>
-              <p className="text-body-md lg:text-body-sm text-slate/70 font-body mb-8">Contáctenos a través de una de las siguientes casas de bolsa:</p>
+              <p className="text-body-md lg:text-body-sm text-slate/70 font-body mb-6">Para transar IVC.A / IVC.B, contacte a una casa de bolsa autorizada. Estas son algunas opciones:</p>
               
               <div className="grid grid-cols-3 lg:grid-cols-5 gap-3">
                 {marketHouses.map((house, index) => (
                   <Link 
                     key={index}
                     href={house.url}
-                    className="aspect-square bg-white border border-slate-50 flex flex-col items-center justify-center rounded-sm hover:border-accent transition-all group p-4"
+                    className="aspect-square bg-white border border-slate-100 flex flex-col items-center justify-center rounded-sm hover:border-accent transition-all group p-4"
                   >
                     <div className="relative w-full h-full mb-2">
                       <Image

@@ -39,7 +39,7 @@ export function Hero() {
     const interval = setInterval(() => {
       setDirection(1)
       setCurrentIndex((prev) => (prev + 1) % slides.length)
-    }, 6000)
+    }, 7000)
 
     return () => clearInterval(interval)
   }, [slides.length])
@@ -119,9 +119,9 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className="max-w-5xl"
+            className="max-w-6xl"
           >
-            <h1 className="text-4xl md:text-4xl lg:text-5xl xl:text-7xl font-display text-white mb-6 leading-tight lg:leading-normal tracking-tight">
+            <h1 className="text-4xl lg:text-5xl xl:text-7xl font-display text-white mb-6 leading-tight lg:leading-normal tracking-tight">
               {currentHero.title}
             </h1>
             <p className="text-base md:text-base lg:text-lg xl:text-xl text-white max-w-3xl mx-auto font-body leading-relaxed">

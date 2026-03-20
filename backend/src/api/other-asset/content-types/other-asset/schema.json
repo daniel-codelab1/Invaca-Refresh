@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "other_assets",
+  "info": {
+    "singularName": "other-asset",
+    "pluralName": "other-assets",
+    "displayName": "Other Asset"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Statement": {
+      "type": "string"
+    },
+    "OtrosActivos": {
+      "type": "component",
+      "component": "layout.otros-activos",
+      "repeatable": true
+    }
+  }
+}

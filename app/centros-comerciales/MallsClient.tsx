@@ -83,16 +83,16 @@ export function MallsClient() {
             {/* Editorial Left */}
             <motion.div className="w-full lg:w-1/2" variants={fadeUpVariant}>
               <span className="inline-block text-accent text-xs font-body font-bold uppercase tracking-widest rounded-xs mb-6">
-                 Experiencia de Clase Mundial
+                  Estándares de operación y continuidad
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-dark mb-8 leading-[1.1]">
-                Espacios diseñados para el éxito comercial.
+                  Portafolio comercial: Gestión y valor sostenible
               </h2>
               <p className="text-body lg:text-body-lg text-slate font-body font-light leading-relaxed mb-4 lg:mb-6">
-                Invaca Investment Company opera y administra algunos de los destinos de retail más importantes y transitados de Venezuela. No construimos simples centros comerciales; desarrollamos ecosistemas de estilo de vida donde las mejores marcas convergen con experiencias inolvidables.
+                Invaca gestiona un portafolio de activos comerciales bajo una propuesta premium, donde la calidad de la experiencia se une a la consistencia operativa. Integramos comercio, gastronomía y servicios con un enfoque estricto en la mejora continua.
               </p>
               <p className="text-body lg:text-body-lg text-slate font-body font-light leading-relaxed">
-                Nuestros espacios están concebidos bajo los más altos estándares de diseño arquitectónico, seguridad y tecnología, asegurando el máximo confort para nuestros visitantes y la mayor rentabilidad para nuestros aliados comerciales.
+                Nuestra gestión se fundamenta en estándares de mantenimiento y seguridad diseñados para fortalecer el desempeño del negocio y consolidar la confianza de nuestros aliados comerciales.
               </p>
             </motion.div>
 
@@ -101,7 +101,7 @@ export function MallsClient() {
                <div className="space-y-4 flex flex-col items-end justify-center">
                   <div className="bg-white w-full lg:w-10/12 border border-neutral-100 p-8 rounded-xs flex flex-col items-center justify-center text-center h-48 hover:-translate-y-1 transition-transform duration-300">
                      <span className="text-6xl font-body font-bold text-dark mb-2">3</span>
-                     <span className="text-sm font-body font-semibold uppercase tracking-widest text-slate">Centros High End</span>
+                     <span className="text-sm font-body font-semibold uppercase tracking-widest text-slate">Activos Comerciales</span>
                   </div>
                   <div className="relative h-96 w-full rounded-xs overflow-hidden">
                      <Image src="/images/malls/fachada-tolon-1.jpg" alt="Interior Mall Vista" fill className="object-cover" />
@@ -113,7 +113,7 @@ export function MallsClient() {
                   </div>
                   <div className="bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center w-full lg:w-10/12 p-8 rounded-xs shadow-xl border border-neutral-800 flex flex-col items-center justify-center text-center h-48 hover:-translate-y-1 transition-transform duration-300">
                      <span className="text-6xl font-body font-bold text-white mb-2">+40M</span>
-                     <span className="text-sm font-body font-semibold uppercase tracking-widest text-cream-200">Visitas Anuales</span>
+                     <span className="text-sm font-body font-semibold uppercase tracking-widest text-cream-200">Afluencia Anual</span>
                   </div>
                   <div className="relative h-96 lg:h-48 rounded-xs overflow-hidden">
                      <Image src="/images/malls/ccllanomall/8826667.jpg" alt="Paseo el Hatillo Vista" fill className="object-cover" />
@@ -125,13 +125,13 @@ export function MallsClient() {
       </section>
 
       {/* 2. INTERACTIVE MALLS GRID (BENTO LUXURY) */}
-      <section className="py-24 relative">
+      <section className="pt-24 pb-12 relative">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="mb-12 md:mb-20 text-center max-w-3xl mx-auto">
-             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-dark font-medium mb-6">Nuestro Portafolio</h2>
-             <p className="text-body lg:text-body-lg text-slate font-body font-light leading-relaxed mb-6">Explora las joyas de nuestro desarrollo comercial. Cada centro tiene una identidad única diseñada para su ubicación demográfica.</p>
+          <div className="mb-12 md:mb-20 text-center max-w-4xl mx-auto">
+             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-dark font-medium mb-6">Portafolio de Activos Comerciales</h2>
+             <p className="text-body lg:text-body-lg text-slate font-body font-light leading-relaxed mb-6">Contamos con activos comerciales de estándar superior, destinos con identidad propia que comparten un mismo estándar de gestión y excelencia operativa.</p>
           </div>
 
           <motion.div 
@@ -183,7 +183,7 @@ export function MallsClient() {
                     </div>
                   </div>
                   
-                  <div className="py-8 px-4 lg:px-8 flex flex-col flex-grow bg-white relative border border-neutral-100 overflow-hidden">
+                  <div className="py-8 px-4 lg:px-8 flex flex-col flex-grow bg-white relative border border-slate-100 overflow-hidden">
                     <h3 className="text-3xl font-display font-medium mb-4 w-fit text-transparent bg-clip-text bg-gradient-to-r from-dark from-40% via-white/20 via-50% to-dark to-60% bg-[length:300%_100%] bg-right group-hover:bg-left transition-none group-hover:transition-all group-hover:duration-1000 group-hover:ease-in-out">
                       {mall.name}
                     </h3>
@@ -225,22 +225,15 @@ export function MallsClient() {
          {/* Decorative Background Elements */}
          <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
          
-         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+         <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-[transparent] rounded-sm py-20 px-2 md:px-20 relative overflow-hidden">
-               {/* Accent Bar */}
-               {/* <div className="absolute top-0 left-0 w-1 h-full bg-accent" /> */}
-               
                <div className="flex flex-col lg:flex-row gap-12 items-center justify-between relative z-10">
                   <div className="w-full lg:w-3/5">
-                     {/* <div className="flex items-center mb-4">
-                        <Store className="w-6 h-6 text-accent mr-3" />
-                        <span className="text-sm font-display font-bold uppercase tracking-widest text-slate">Oportunidades Comerciales</span>
-                     </div> */}
                      <h2 className="text-3xl md:text-5xl font-display font-medium text-dark mb-6 leading-tight">
-                        Lleva tu marca a los destinos más exclusivos.
+                        Posicione su marca en activos de estándar superior.
                      </h2>
                      <p className="text-body lg:text-body-lg text-slate font-body font-light leading-relaxed mb-0">
-                        Disponemos de locales comerciales de alto perfil, islas y espacios publicitarios en nuestros malls. Forma parte del portafolio más prestigioso del país y asegura el tráfico ideal para tu negocio.
+                        Contamos con locales y espacios publicitarios en centros comerciales que integran comercio y servicios con foco en la calidad de la experiencia. Ponemos a su disposición locales, islas y espacios publicitarios gestionados bajo estándares de administración profesional.
                      </p>
                   </div>
                   
@@ -249,7 +242,7 @@ export function MallsClient() {
                         href="/contacto" 
                         className="inline-flex items-center justify-center px-8 py-5 bg-dark text-white font-body font-semibold uppercase tracking-widest text-sm hover:bg-accent transition-all duration-300 group"
                      >
-                        Solicitar Información B2B
+                        Explorar oportunidades comerciales
                         <ArrowRight className="w-4 h-4 ml-3 group-hover:translate-x-1 transition-transform" />
                      </Link>
                   </div>

@@ -6,51 +6,7 @@ import Autoplay from 'embla-carousel-autoplay'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronLeft, ChevronRight, Calendar } from 'lucide-react'
-
-const news = [
-  {
-    id: 1,
-    title: 'INVACA Celebra su Centenario con Nuevo Plan de Inversiones',
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop',
-    date: '15 Enero 2025',
-    category: 'Noticias',
-  },
-  {
-    id: 2,
-    title: 'Fusión con FVI: Consolidación de Operaciones',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop',
-    date: '10 Enero 2024',
-    category: 'Corporativo',
-  },
-  {
-    id: 3,
-    title: 'Nuevas Oportunidades de Inversión en Centros Comerciales',
-    image: 'https://images.unsplash.com/photo-1555529669-2269763671c0?w=600&h=400&fit=crop',
-    date: '5 Diciembre 2024',
-    category: 'Inversiones',
-  },
-  {
-    id: 4,
-    title: 'Resultados Financieros del Tercer Trimestre 2024',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-    date: '20 Noviembre 2024',
-    category: 'Finanzas',
-  },
-  {
-    id: 5,
-    title: 'Modernización de Infraestructura en Centros Comerciales',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop',
-    date: '15 Noviembre 2024',
-    category: 'Infraestructura',
-  },
-  {
-    id: 6,
-    title: 'Asamblea General de Accionistas 2024',
-    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop',
-    date: '10 Octubre 2024',
-    category: 'Corporativo',
-  },
-]
+import { news } from '@/lib/data/news'
 
 export function NewsSection() {
   const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -118,12 +74,12 @@ export function NewsSection() {
           <div className="flex -ml-2">
             {news.map((item) => (
               <div
-                key={item.id}
+                key={item.slug}
                 className="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 pl-4"
               >
                 <div className="group h-full flex flex-col  border-transparent transition-all duration-300">
                   {/* Imagen */}
-                  <Link href={`/noticias/${item.id}`} className="relative block overflow-hidden aspect-[1/1] [clip-path:polygon(0%_0%,_82%_0,_100%_18%,_100%_100%,_0%_100%)]">
+                  <Link href={`/noticias/${item.slug}`} className="relative block overflow-hidden aspect-[1/1] [clip-path:polygon(0%_0%,_82%_0,_100%_18%,_100%_100%,_0%_100%)]">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -146,7 +102,7 @@ export function NewsSection() {
                       {item.category}
                     </span>
                     
-                    <Link href={`/noticias/${item.id}`} className="block mb-8 px-6">
+                    <Link href={`/noticias/${item.slug}`} className="block mb-8 px-6">
                       <h3 className="text-xl font-display font-medium text-dark leading-snug group-hover:text-accent transition-colors">
                         {item.title}
                       </h3>
@@ -154,7 +110,7 @@ export function NewsSection() {
 
                     <div className="mt-auto py-4 px-6 border-t border-neutral-100 flex items-center justify-between">
                       <Link
-                        href={`/noticias/${item.id}`}
+                        href={`/noticias/${item.slug}`}
                         className="inline-flex items-center text-sm font-body font-semibold text-dark hover:text-accent transition-colors group/link"
                       >
                         Leer más

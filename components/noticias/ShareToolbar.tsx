@@ -32,44 +32,38 @@ export function ShareToolbar({ title }: ShareToolbarProps) {
 
   return (
     <motion.div 
-      className="sticky top-32 flex flex-col gap-4 bg-white p-4 rounded-2xl shadow-xl border border-neutral-100"
+      className="flex flex-row lg:flex-col gap-4"
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.5, duration: 0.8 }}
     >
-      <div className="text-xs font-display font-medium text-slate uppercase tracking-widest text-center mb-2">
-        Compartir
-      </div>
-      
       <button 
         onClick={handleShareLinkedin}
-        className="w-12 h-12 rounded-full flex items-center justify-center bg-neutral-50 text-dark hover:bg-[#0A66C2] hover:text-white transition-colors duration-300 group"
+        className="w-10 h-10 rounded-full flex items-center justify-center bg-dark text-white hover:bg-black transition-colors duration-300"
         aria-label="Compartir en LinkedIn"
       >
-        <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
+        <Linkedin className="w-4 h-4" fill="currentColor" />
       </button>
 
       <button 
         onClick={handleShareTwitter}
-        className="w-12 h-12 rounded-full flex items-center justify-center bg-neutral-50 text-dark hover:bg-black hover:text-white transition-colors duration-300 group"
+        className="w-10 h-10 rounded-full flex items-center justify-center bg-dark text-white hover:bg-black transition-colors duration-300"
         aria-label="Compartir en Twitter"
       >
-        <Twitter className="w-5 h-5 group-hover:scale-110 transition-transform" />
+        <Twitter className="w-4 h-4" fill="currentColor" />
       </button>
-
-      <hr className="border-neutral-100 my-1" />
 
       <button 
         onClick={handleCopyLink}
-        className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300 group ${
-          copied ? 'bg-green-500 text-white' : 'bg-neutral-50 text-dark hover:bg-accent hover:text-white'
+        className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 ${
+          copied ? 'bg-green-500 text-white' : 'bg-dark text-white hover:bg-black'
         }`}
         aria-label="Copiar Enlace"
       >
         {copied ? (
-          <Check className="w-5 h-5" />
+          <Check className="w-4 h-4" />
         ) : (
-          <LinkIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+          <LinkIcon className="w-4 h-4" />
         )}
       </button>
     </motion.div>

@@ -47,6 +47,7 @@ function mapStrapiMall(apiData: any): MallData | null {
       : ['/images/assets/bg-ivc-4.jpg'],
     contact: {
       phone: apiData.Contact?.Phone || '',
+      phone2: apiData.Contact?.PhoneUrl || '',
       email: apiData.Contact?.Email || '',
       openingHours: apiData.Contact?.OpeningHours || '',
       website: apiData.Contact?.Website || '',

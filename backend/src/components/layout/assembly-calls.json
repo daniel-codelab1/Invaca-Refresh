@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_layout_assembly_calls",
+  "info": {
+    "displayName": "Assembly Calls"
+  },
+  "options": {},
+  "attributes": {
+    "Date": {
+      "type": "date"
+    },
+    "Time": {
+      "type": "time"
+    },
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "Ordinaria",
+        "Extraordinaria"
+      ]
+    },
+    "Title": {
+      "type": "string"
+    },
+    "File": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Condition": {
+      "type": "enumeration",
+      "enum": [
+        "Open",
+        "Closed"
+      ]
+    }
+  },
+  "config": {}
+}

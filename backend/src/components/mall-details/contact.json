@@ -8,6 +8,9 @@
     "Phone": {
       "type": "string"
     },
+    "PhoneUrl": {
+      "type": "string"
+    },
     "Email": {
       "type": "email"
     },

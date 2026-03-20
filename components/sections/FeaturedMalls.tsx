@@ -55,13 +55,13 @@ export function FeaturedMalls() {
             {/* Title - Left */}
             <div className="flex-1">
               <h2 className="text-4xl lg:text-6xl font-display font-normal text-dark mb-0 tracking-tight leading-tight lg:!leading-[4rem]">
-                Explora Nuestros <br /> Centros Comerciales
+                Explore Nuestro <br /> Portafolio de Activos
               </h2>
             </div>
             {/* Description - Right */}
             <div className="flex-1 flex flex-col justify-around items-start h-full gap-5 lg:max-w-lg">
               <p className="text-body-md text-slate-500 font-body leading-relaxed text-justify">
-                Descubre una selección exclusiva de centros comerciales High-End, meticulosamente curados para brindar lo mejor en experiencias de compra y opciones de inversión inmobiliaria de primer nivel.
+                Operamos un portafolio de activos comerciales bajo estándares de gestión disciplinada. En cada destino, integramos comercio, gastronomía y servicios con un enfoque estricto en la consistencia operativa y la seguridad para nuestros aliados.
               </p>
               <Link
                   href={`/centros-comerciales/tolon-fashion-mall`}

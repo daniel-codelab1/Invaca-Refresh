@@ -15,6 +15,11 @@
       "type": "component",
       "component": "layout.hero-slide",
       "repeatable": true
+    },
+    "urbanProjects": {
+      "type": "component",
+      "component": "layout.urban-projects",
+      "repeatable": true
     }
   }
 }

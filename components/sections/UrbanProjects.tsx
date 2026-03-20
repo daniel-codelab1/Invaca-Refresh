@@ -3,13 +3,14 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import { getStrapiMedia, STRAPI_BASE_URL } from '@/lib/tools'
 
-const projects = [
+export const fallbackProjects = [
   {
     id: '01',
     title: 'Bulevar Sucre',
     location: 'El Hatillo, Caracas',
-    description: 'Un nuevo espacio peatonal y comercial que revitalizará el casco histórico de El Hatillo, integrando arquitectura moderna con la tradición local.',
+    description: 'Un corredor peatonal y comercial que conecta el Pueblo de El Hatillo con Paseo El Hatillo, activando el recorrido y fortaleciendo el flujo y la experiencia del visitante, en integración con el entorno local.',
     images: [
       '/images/urban/bulevar-sucre.jpg',
       '/images/urban/bulevar-sucre-1.jpg',
@@ -22,7 +23,7 @@ const projects = [
     id: '02',
     title: 'Bulevar Tolón (Cuadra Las Mercedes)',
     location: 'Las Mercedes, Caracas',
-    description: 'Expansión estratégica que conectará el Tolón Fashion Mall con su entorno urbano, creando un corredor gastronómico y cultural de primer nivel.',
+    description: 'Expansión estratégica que conecta Tolón Fashion Mall con su entorno urbano, articulando movilidad, recorrido peatonal y espacios de experiencia. Activa un corredor comercial y gastronómico que impulsa flujo, permanencia y valor para aliados comerciales y visitantes, en el marco de Cuadra Las Mercedes.',
     images: [
       '/images/urban/bulevar-tolon.jpg',
       '/images/urban/bulevar-tolon-1.jpg',
@@ -31,7 +32,7 @@ const projects = [
   }
 ]
 
-function ProjectCard({ project, index }: { project: typeof projects[0], index: number }) {
+function ProjectCard({ project, index }: { project: typeof fallbackProjects[0], index: number }) {
   const [isHovered, setIsHovered] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
@@ -70,11 +71,10 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
             transition={{ duration: 0.5 }}
             className="absolute inset-0"
           >
-            <Image
+            <img
               src={project.images[currentImageIndex]}
               alt={project.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
             />
           </motion.div>
         </AnimatePresence>
@@ -88,7 +88,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
       </div>
 
       {/* Content */}
-      <div className="flex items-start p-6 pb-10 bg-white border border-neutral-900 border-t-0">
+      <div className="flex items-start min-h-60 p-6 pb-10 bg-white border border-neutral-900 border-t-0">
         {/* <span className="text-4xl md:text-5xl font-display font-light text-dark/20 group-hover:text-accent transition-colors duration-300">
           {project.id}
         </span> */}
@@ -110,6 +110,40 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
 }
 
 export function UrbanProjects() {
+  const [projectsData, setProjectsData] = useState(fallbackProjects);
+
+  useEffect(() => {
+    getStrapiMedia('/api/home-page?populate=urbanProjects.Images').then((strapiData) => {
+      if (strapiData?.data?.urbanProjects && strapiData.data.urbanProjects.length > 0) {
+        const mappedProjects = strapiData.data.urbanProjects.map((proj: any, index: number) => {
+          
+          const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://127.0.0.1:1337';
+          let imagesArray: string[] = [];
+          if (proj.Images && Array.isArray(proj.Images)) {
+            imagesArray = proj.Images.map((img: any) => `${strapiUrl}${img.url}`).filter(Boolean);
+          } else if (proj.Images && proj.Images.url) {
+            imagesArray = [`${strapiUrl}${proj.Images.url}`];
+          }
+
+          // Fallback image if no images provided
+          if (imagesArray.length === 0) {
+             imagesArray = ['/images/urban/bulevar-sucre.jpg'];
+          }
+
+          return {
+            id: String(index + 1).padStart(2, '0'),
+            title: proj.Title || '',
+            location: proj.Location || '',
+            description: proj.Description || '',
+            images: imagesArray,
+            status: proj.Condition || ''
+          };
+        });
+        setProjectsData(mappedProjects);
+      }
+    }).catch(err => console.error("Error fetching urban projects:", err));
+  }, []);
+
   return (
     <section className="py-0 md:py-12 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6">
@@ -129,7 +163,7 @@ export function UrbanProjects() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {projects.map((project, index) => (
+          {projectsData.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>

@@ -20,8 +20,8 @@ const dropdownItems = [
     href: '/nosotros/gobernanza',
     label: 'Gobernanza',
     previewImage: '/images/assets/gobernanza-2.jpg',
-    previewTitle: 'Gobernanza',
-    previewDescription: 'Estructura corporativa y principios de gobierno',
+    previewTitle: 'Gobierno Corporativo',
+    previewDescription: 'Marco de supervisión, transparencia y rendición de cuentas',
   },
 ]
 

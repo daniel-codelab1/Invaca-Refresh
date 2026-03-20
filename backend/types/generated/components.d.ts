@@ -1,5 +1,20 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface LayoutAssemblyCalls extends Struct.ComponentSchema {
+  collectionName: 'components_layout_assembly_calls';
+  info: {
+    displayName: 'Assembly Calls';
+  };
+  attributes: {
+    Condition: Schema.Attribute.Enumeration<['Open', 'Closed']>;
+    Date: Schema.Attribute.Date;
+    File: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Time: Schema.Attribute.Time;
+    Title: Schema.Attribute.String;
+    Type: Schema.Attribute.Enumeration<['Ordinaria', 'Extraordinaria']>;
+  };
+}
+
 export interface LayoutCorporateMembers extends Struct.ComponentSchema {
   collectionName: 'components_layout_corporate_members';
   info: {
@@ -9,6 +24,19 @@ export interface LayoutCorporateMembers extends Struct.ComponentSchema {
     Image: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
     Name: Schema.Attribute.String;
     Title: Schema.Attribute.String;
+  };
+}
+
+export interface LayoutDepartaments extends Struct.ComponentSchema {
+  collectionName: 'components_layout_departaments';
+  info: {
+    displayName: 'Departaments';
+  };
+  attributes: {
+    Email: Schema.Attribute.Email;
+    Name: Schema.Attribute.String;
+    PhoneLink: Schema.Attribute.String;
+    PhoneText: Schema.Attribute.String;
   };
 }
 
@@ -39,6 +67,39 @@ export interface LayoutHistoryBlocks extends Struct.ComponentSchema {
   };
 }
 
+export interface LayoutOtrosActivos extends Struct.ComponentSchema {
+  collectionName: 'components_layout_otros_activos';
+  info: {
+    displayName: 'Otros Activos';
+  };
+  attributes: {
+    Description: Schema.Attribute.Text;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Location: Schema.Attribute.Text;
+    Name: Schema.Attribute.String;
+    Type: Schema.Attribute.String;
+  };
+}
+
+export interface LayoutUrbanProjects extends Struct.ComponentSchema {
+  collectionName: 'components_layout_urban_projects';
+  info: {
+    displayName: 'Urban Projects';
+  };
+  attributes: {
+    Condition: Schema.Attribute.Enumeration<
+      ['Terminado', 'En Desarrollo', 'Pr\u00F3ximamente']
+    >;
+    Description: Schema.Attribute.Text;
+    Images: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    Location: Schema.Attribute.String;
+    Title: Schema.Attribute.String;
+  };
+}
+
 export interface MallDetailsContact extends Struct.ComponentSchema {
   collectionName: 'components_mall_details_contacts';
   info: {
@@ -49,6 +110,7 @@ export interface MallDetailsContact extends Struct.ComponentSchema {
     Instagram: Schema.Attribute.String;
     OpeningHours: Schema.Attribute.String;
     Phone: Schema.Attribute.String;
+    PhoneUrl: Schema.Attribute.String;
     Website: Schema.Attribute.String;
   };
 }
@@ -93,9 +155,13 @@ export interface MallDetailsStats extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'layout.assembly-calls': LayoutAssemblyCalls;
       'layout.corporate-members': LayoutCorporateMembers;
+      'layout.departaments': LayoutDepartaments;
       'layout.hero-slide': LayoutHeroSlide;
       'layout.history-blocks': LayoutHistoryBlocks;
+      'layout.otros-activos': LayoutOtrosActivos;
+      'layout.urban-projects': LayoutUrbanProjects;
       'mall-details.contact': MallDetailsContact;
       'mall-details.manager': MallDetailsManager;
       'mall-details.performance': MallDetailsPerformance;

@@ -6,19 +6,19 @@ import { motion } from 'framer-motion'
 const stats = [
   {
     value: '100+',
-    label: ['Años de actividad', 'ininterrumpida'],
+    label: ['Años de trayectoria', 'y continuidad'],
   },
   {
     value: '3',
-    label: ['Centros comerciales', 'en operación'],
+    label: ['Activos comerciales', 'en operación'],
   },
   {
     value: '70+',
-    label: ['Años en Bolsa de Valores', 'de Caracas'],
+    label: ['Años cotizando en', 'Bolsa de Valores de Caracas'],
   },
   {
     value: 'IVC.A/B',
-    label: ['Cotización bursátil en la', 'Bolsa de Valores de Caracas'],
+    label: ['Símbolos de cotización', 'en la BVC'],
   },
 ]
 

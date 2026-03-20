@@ -14,21 +14,21 @@ const dropdownItems = [
     label: 'Centros Comerciales',
     previewImage: '/images/malls/collage-udn.jpg',
     previewTitle: 'Centros Comerciales',
-    previewDescription: 'Descubre nuestros centros comerciales de alta gama',
+    previewDescription: 'Espacios premium donde el estilo y las tendencias marcan la experiencia del visitante.',
   },
   {
     href: '/estacionamientos',
     label: 'Estacionamientos',
     previewImage: '/images/malls/ccllanomall/parking-llanomall.jpg',
     previewTitle: 'Estacionamientos',
-    previewDescription: 'Servicios de estacionamiento estratégicamente ubicados',
+    previewDescription: 'Infraestructura de estacionamiento con enfoque en accesibilidad, seguridad y operación eficiente.',
   },
   {
     href: '/otros-activos',
     label: 'Otros Activos',
     previewImage: '/images/other-assets/torre-provincial.jpg',
     previewTitle: 'Otros Activos',
-    previewDescription: 'Explora nuestro portafolio diversificado de activos inmobiliarios',
+    previewDescription: 'Explora nuestro portafolio diversificado de activos inmobiliarios.',
   },
 ]
 

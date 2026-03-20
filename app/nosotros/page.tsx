@@ -25,7 +25,7 @@ export default function NosotrosPage() {
         
         if (strapiData.data.HistoryBlocks) {
           const mappedEvents = strapiData.data.HistoryBlocks.map((block: any) => {
-            const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://192.168.101.23:1337';
+            const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://127.0.0.1:1337';
             const imageUrl = block.Image?.url ? `${strapiUrl}${block.Image.url}` : '/images/assets/geometric-bg.jpg';
             
             return {
@@ -115,7 +115,7 @@ export default function NosotrosPage() {
       <section className="py-16 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto text-justify lg:text-center mt-12">
-            <h2 className="relative inline-block text-3xl md:text-4xl lg:text-5xl lg:text-[3rem] border-2 border-dark/10 p-10 md:p-20 font-display font-medium text-dark leading-tight lg:leading-relaxed before:absolute before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white">
+            <h2 className="relative inline-block text-3xl md:text-4xl lg:text-5xl lg:text-[3rem] border-2 border-dark p-10 md:p-20 font-display font-medium text-dark before:absolute before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white">
               {words.map((word, i) => (
                 <motion.span
                   key={i}
@@ -231,11 +231,10 @@ export default function NosotrosPage() {
             className="max-w-4xl mx-auto space-y-8"
           >
             <h2 className="text-4xl md:text-6xl font-display font-medium text-white mb-8 tracking-tight">
-              Tradición, innovación y futuro
+              Trayectoria y enfoque estratégico
             </h2>
             <p className="text-body-md md:text-body-lg text-cream-100/90 font-body font-light leading-relaxed">
-              Nuestra evolución se refleja en nuestra identidad visual renovada, que simboliza la fusión de tradición y modernidad. 
-              Seguimos comprometidos con nuestros accionistas, clientes y empleados en construir un futuro sólido, innovador y próspero.
+              La evolución de Invaca se expresa en una identidad renovada que refleja su carácter institucional. Su compromiso se sostiene en una gestión disciplinada, estándares de gobierno y un enfoque estratégico orientado a crear valor para accionistas, aliados comerciales y colaboradores
             </p>
           </motion.div>
         </div>

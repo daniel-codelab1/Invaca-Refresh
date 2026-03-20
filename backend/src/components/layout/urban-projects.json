@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_layout_urban_projects",
+  "info": {
+    "displayName": "Urban Projects"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Location": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Images": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Condition": {
+      "type": "enumeration",
+      "enum": [
+        "Terminado",
+        "En Desarrollo",
+        "Próximamente"
+      ]
+    }
+  },
+  "config": {}
+}

@@ -28,7 +28,7 @@ export function NoticiasClient({ news }: NoticiasClientProps) {
     <section className="py-24 md:py-32 bg-cream-50 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-2 md:gap-x-4 gap-y-4 md:gap-y-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
@@ -42,52 +42,52 @@ export function NoticiasClient({ news }: NoticiasClientProps) {
               <motion.div 
                 key={item.slug} 
                 variants={itemVariants}
-                className={`group relative flex flex-col ${isFeatured ? 'md:col-span-2 lg:col-span-2' : ''}`}
+                className={`group h-full flex flex-col border-transparent transition-all duration-300 ${isFeatured ? 'md:col-span-2 lg:col-span-2' : ''}`}
               >
                 <Link
                   href={`/noticias/${item.slug}`}
-                  className="flex flex-col h-full bg-white rounded-sm shadow-md overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-1"
+                  className={`relative block overflow-hidden ${isFeatured ? 'aspect-[1/1] md:aspect-[2/1] [clip-path:polygon(0%_0%,_82%_0,_100%_18%,_100%_100%,_0%_100%)] md:[clip-path:polygon(0%_0%,_93%_0,_100%_15%,_100%_100%,_0%_100%)]' : 'aspect-[1/1] [clip-path:polygon(0%_0%,_82%_0,_100%_18%,_100%_100%,_0%_100%)]'}`}
                 >
-                  <div className={`relative w-full ${isFeatured ? 'h-80 md:h-[400px]' : 'h-64'} overflow-hidden bg-neutral-100`}>
-                    <div className="absolute inset-0 bg-dark/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    />
-                    
-                    {/* Category Badge overlay on image */}
-                    <div className="absolute top-6 left-6 z-20">
-                       <span className="inline-block px-4 py-1.5 bg-white/90 backdrop-blur-sm text-dark text-xs font-display font-semibold uppercase tracking-wider rounded-sm shadow-sm group-hover:bg-accent group-hover:text-white transition-colors duration-300">
-                          {item.category}
-                       </span>
-                    </div>
-                  </div>
-
-                  <div className="p-8 md:p-10 flex flex-col flex-grow bg-white relative">
-                    {/* Decorative Top Accent Line */}
-                    <div className="absolute top-0 left-0 w-0 h-1 bg-accent group-hover:w-full transition-all duration-700 ease-out" />
-                    
-                    <div className="flex items-center text-slate font-body text-sm font-medium mb-4">
-                      <Calendar className="h-4 w-4 mr-2 text-accent" />
-                      {item.date}
-                    </div>
-                    
-                    <h3 className={`${isFeatured ? 'text-3xl md:text-4xl' : 'text-2xl'} font-display font-bold text-dark mb-4 group-hover:text-accent transition-colors duration-300 leading-tight`}>
-                      {item.title}
-                    </h3>
-                    
-                    <p className={`text-slate font-body mb-8 flex-grow ${isFeatured ? 'text-lg line-clamp-3' : 'line-clamp-2'}`}>
-                      {item.excerpt}
-                    </p>
-                    
-                    <div className="mt-auto pt-6 border-t border-neutral-100 flex items-center justify-between text-dark font-display font-semibold text-sm uppercase tracking-wide group-hover:text-accent transition-colors duration-300">
-                      <span>Leer Artículo Completo</span>
-                      <ArrowRight className="h-5 w-5 transform group-hover:translate-x-2 transition-transform duration-300" />
-                    </div>
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-dark/20 group-hover:bg-dark/0 transition-colors duration-300 z-10" />
+                  
+                  {/* Date Badge overlay on image */}
+                  <div className="absolute top-4 left-4 z-20 bg-white/40 backdrop-blur-sm px-3 py-1">
+                    <span className="text-xs font-body font-bold tracking-wider text-white uppercase flex items-center gap-1">
+                      {item.date.split(' ').slice(0, 2).join(' ')}
+                    </span>
                   </div>
                 </Link>
+
+                <div className="flex flex-col w-11/12 mt-[-60px] z-20 flex-grow bg-white border border-neutral-900 border-b-4">
+                  <span className="text-accent text-xs font-bold uppercase inline-block tracking-widest mb-3 px-6 pt-6">
+                    {item.category}
+                  </span>
+                  
+                  <Link href={`/noticias/${item.slug}`} className="block mb-6 px-6 flex-grow">
+                    <h3 className={`${isFeatured ? 'text-xl md:text-2xl lg:text-3xl' : 'text-xl'} font-display font-medium text-dark leading-snug group-hover:text-accent transition-colors`}>
+                      {item.title}
+                    </h3>
+                    <p className={`text-slate text-sm font-body mt-4 ${isFeatured ? 'line-clamp-3' : 'line-clamp-2'}`}>
+                      {item.excerpt}
+                    </p>
+                  </Link>
+                  
+                  <div className="mt-auto py-4 px-6 border-t border-neutral-100 flex items-center justify-between">
+                    <Link
+                      href={`/noticias/${item.slug}`}
+                      className="inline-flex items-center text-sm font-body font-semibold text-dark hover:text-accent transition-colors group/link"
+                    >
+                      Leer más
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
+                    </Link>
+                  </div>
+                </div>
               </motion.div>
             )
           })}

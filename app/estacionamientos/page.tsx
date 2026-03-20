@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Maximize, ShieldCheck, Car, CreditCard, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import { getStrapiMedia } from '@/lib/tools'
 
 // FadeIn Helper Component
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => (
@@ -47,36 +48,59 @@ const Counter = ({ value, duration = 2, className, formatOptions, prefix = "", s
   return <motion.span ref={nodeRef} className={className}>{displayVal}</motion.span>
 }
 
+const fallbackParkings = [
+  {
+    id: 'tolon-fashion-mall',
+    name: 'Estacionamiento Tolón Fashion Mall',
+    slug: 'tolon-fashion-mall',
+    location: 'Caracas, Venezuela',
+    image: '/images/malls/tolon/parking-tolon.jpg',
+    description: 'Más de 1.200 puestos distribuidos en niveles seguros y tecnológicos.',
+    spaces: '1.200'
+  },
+  {
+    id: 'paseo-el-hatillo',
+    name: 'Parking VIP Paseo El Hatillo',
+    slug: 'paseo-el-hatillo',
+    location: 'El Hatillo, Caracas, Venezuela',
+    image: '/images/malls/paseoelhatillo/parking-vip-pehll.jpg',
+    description: 'Confort y seguridad para toda la familia en un ambiente exclusivo.',
+    spaces: '1.500'
+  },
+  {
+    id: 'llano-mall',
+    name: 'Parking Llano Mall',
+    slug: 'llano-mall-ciudad-comercial',
+    location: 'Acarigua, Portuguesa, Venezuela',
+    image: '/images/malls/ccllanomall/parking-llanomall.jpg',
+    description: 'Amplia capacidad y fluidez para el principal centro comercial de la región.',
+    spaces: '2.650'
+  }
+]
+
 export default function EstacionamientosPage() {
-  const parkings = [
-    {
-      id: 'tolon-fashion-mall',
-      name: 'Estacionamiento Tolón Fashion Mall',
-      slug: 'tolon-fashion-mall',
-      location: 'Caracas, Venezuela',
-      image: '/images/malls/tolon/parking-tolon.jpg',
-      description: 'Más de 1.200 puestos distribuidos en niveles seguros y tecnológicos.',
-      spaces: '1.200'
-    },
-    {
-      id: 'paseo-el-hatillo',
-      name: 'Parking VIP Paseo El Hatillo',
-      slug: 'paseo-el-hatillo',
-      location: 'El Hatillo, Caracas, Venezuela',
-      image: '/images/malls/paseoelhatillo/parking-vip-pehll.jpg',
-      description: 'Confort y seguridad para toda la familia en un ambiente exclusivo.',
-      spaces: '1.500'
-    },
-    {
-      id: 'llano-mall',
-      name: 'Parking Llano Mall',
-      slug: 'llano-mall-ciudad-comercial',
-      location: 'Acarigua, Portuguesa, Venezuela',
-      image: '/images/malls/ccllanomall/parking-llanomall.jpg',
-      description: 'Amplia capacidad y fluidez para el principal centro comercial de la región.',
-      spaces: '2.650'
-    }
-  ]
+  const [parkings, setParkings] = useState(fallbackParkings);
+
+  useEffect(() => {
+    getStrapiMedia('/api/parkings?populate=Image').then((strapiData) => {
+      if (strapiData?.data && strapiData.data.length > 0) {
+        const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://127.0.0.1:1337';
+        const mappedParkings = strapiData.data.map((parking: any) => {
+          const imageUrl = parking.Image?.url ? `${strapiUrl}${parking.Image.url}` : fallbackParkings[0].image;
+          return {
+            id: String(parking.id || parking.documentId),
+            name: parking.Name || '',
+            slug: parking.Slug || '',
+            location: parking.Location || '',
+            image: imageUrl,
+            description: parking.Description || '',
+            spaces: parking.Spaces || ''
+          };
+        });
+        setParkings(mappedParkings);
+      }
+    }).catch(err => console.error("Error fetching parkings collection:", err));
+  }, []);
 
   const features = [
     {
@@ -263,7 +287,7 @@ export default function EstacionamientosPage() {
               Estacionamientos
             </h1>
             <p className="text-lg md:text-2xl text-cream-100/90 font-body font-light max-w-3xl mx-auto drop-shadow-md">
-              Soluciones de movilidad que elevan la experiencia.
+              Soluciones de movilidad integradas a nuestra gestión comercial.
             </p>
           </motion.div>
         </motion.div>
@@ -274,10 +298,10 @@ export default function EstacionamientosPage() {
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
         <div className="mx-auto px-0 sm:px-0 lg:px-0">
           
-          <div className="mb-8 md:mb-12 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 md:mb-12 text-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
              <span className="text-accent font-bold tracking-widest uppercase text-sm mb-6 block">Administración</span>
-             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-dark font-medium mb-8">Estacionamientos Operados</h2>
-             <p className="text-body lg:text-body-lg text-slate max-w-2xl mx-auto font-body font-light leading-relaxed mb-6">Explora nuestra red de aparcamientos operados con los más altos estándares de calidad, seguridad y tecnología inteligente.</p>
+             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display text-dark font-medium mb-8">Gestión de Estacionamientos</h2>
+             <p className="text-body lg:text-body-lg text-slate max-w-4xl mx-auto font-body font-light leading-relaxed mb-6">Nuestro modelo de gestión asegura una operación consistente en nuestra red de estacionamientos, garantizando la fluidez del servicio para nuestros visitantes y aliados comerciales.</p>
           </div>
 
           <div className="relative w-full group py-8">
@@ -329,11 +353,10 @@ export default function EstacionamientosPage() {
                     onClick={(e) => { if (dragDistance > 5) e.preventDefault(); }}
                     draggable={false}
                   >
-                    <Image
+                    <img
                       src={parking.image}
                       alt={parking.name}
-                      fill
-                      className="object-cover transition-transform duration-1000 group-hover/card:scale-105 select-none"
+                      className="object-cover w-full h-full absolute inset-0 transition-transform duration-1000 group-hover/card:scale-105 select-none"
                       draggable={false}
                     />
                     
@@ -384,31 +407,31 @@ export default function EstacionamientosPage() {
             {/* Editorial Left */}
             <motion.div className="w-full lg:w-1/2" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
               <span className="inline-block text-accent text-xs font-body font-bold uppercase tracking-widest rounded-xs mb-6">
-                 Ingeniería en Movilidad
+                 Gestión de Movilidad
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-dark mb-8 leading-[1.1]">
-                Comodidad y seguridad integral.
+                Consistencia y seguridad operativa.
               </h2>
               <p className="text-body lg:text-body-lg text-slate text-left font-body font-light leading-relaxed mb-6">
-                En Invaca Investment Company, desarrollamos y administramos soluciones de movilidad automotriz que elevan la experiencia de nuestros visitantes desde el momento en que llegan. Nuestra red de estacionamientos está diseñada para maximizar el confort, optimizando tiempos e integrando lo último en tecnología de gestión inteligente.
+                Gestionamos nuestros estacionamientos como el primer punto de confianza para el visitante. Optimizamos la movilidad mediante iluminación estratégica, seguridad activa y tecnología de acceso ágil, eliminando fricciones urbanas. Esta operación disciplinada asegura un entorno fluido y cómodo que preserva el valor de nuestros activos y el de nuestros aliados comerciales.
               </p>
             </motion.div>
 
             {/* Visual Right (Metrics) */}
             <motion.div className="w-full pl-0 lg:pl-12 lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
                <div className="space-y-4 flex flex-col items-end justify-center">
-                  <div className="bg-white backdrop-blur-md w-full lg:w-11/12 p-8 rounded-xs flex flex-col items-center justify-center text-center h-48 hover:-translate-y-1 transition-transform duration-300 border border-slate lg:border-white/10">
-                     <span className="text-6xl font-body font-bold text-dark mb-2"><Counter value={3} /></span>
+                  <div className="bg-white backdrop-blur-md w-full lg:w-11/12 p-8 rounded-xs flex flex-col items-center justify-center text-center h-48 hover:-translate-y-1 transition-transform duration-300 border border-slate lg:border-slate-200">
+                     <span className="text-6xl font-body font-bold text-dark mb-4"><Counter value={3} /></span>
                      <span className="text-xs font-body font-semibold uppercase tracking-widest text-dark">Parkings Operados</span>
                   </div>
                   <div className="bg-accent w-full p-8 rounded-xs border border-accent flex flex-col items-center justify-center text-center h-48 hover:-translate-y-1 transition-transform duration-300">
-                     <span className="text-5xl font-body font-bold text-white mb-2"><Counter value={5350} prefix="+" /></span>
+                     <span className="text-5xl font-body font-bold text-white mb-4"><Counter value={5350} prefix="+" /></span>
                      <span className="text-xs font-body font-semibold uppercase tracking-widest text-white/90">Puestos Totales</span>
                   </div>
                </div>
                <div className="space-y-4 pt-0 lg:pt-12">
                   <div className="bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center w-full p-8 rounded-xs border border-neutral-800 flex flex-col items-center justify-center text-center h-56 hover:-translate-y-1 transition-transform duration-300">
-                     <span className="text-6xl font-body font-bold text-white mb-2"><Counter value={2.5} suffix="M" formatOptions={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }} /></span>
+                     <span className="text-6xl font-body font-bold text-white mb-4"><Counter value={2.5} suffix="M" formatOptions={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }} /></span>
                      <span className="text-xs font-body font-semibold uppercase tracking-widest text-cream-200">Ocupación Anual</span>
                   </div>
                </div>

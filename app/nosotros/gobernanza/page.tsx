@@ -108,10 +108,10 @@ export default function GobernanzaPage() {
               Estructura Corporativa
             </span>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-medium text-white mb-6 drop-shadow-xl tracking-tight">
-              Gobernanza
+              Gobierno Corporativo
             </h1>
             <p className="text-lg md:text-2xl text-cream-100/90 font-body font-light max-w-3xl mx-auto drop-shadow-md">
-              Dirección corporativa y principios rectores
+              Marco de supervisión, transparencia y rendición de cuentas
             </p>
           </motion.div>
         </motion.div>
@@ -121,7 +121,7 @@ export default function GobernanzaPage() {
       <section className="py-16 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto text-justify lg:text-center mt-12">
-            <h2 className="relative inline-block text-3xl md:text-4xl lg:text-[2.5rem] border-2 border-dark/10 p-10 md:p-20 font-display font-medium text-dark leading-tight lg:leading-snug before:absolute before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white">
+            <h2 className="relative inline-block text-3xl md:text-4xl lg:text-5xl border-2 border-dark p-10 md:p-20 font-display font-medium text-dark before:absolute before:bottom-[-4px] before:right-[40px] before:w-[120px] before:h-[4px] before:bg-white">
               {words.map((word, i) => (
                 <motion.span
                   key={i}

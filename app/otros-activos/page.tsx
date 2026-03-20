@@ -142,7 +142,7 @@ export default function OtrosActivosPage() {
                        <p className="text-xs md:text-sm uppercase tracking-widest font-semibold text-slate-400 mb-6 font-body">
                          {asset.location}
                        </p>
-                       <p className="text-md md:text-body-md text-slate-500 font-body leading-relaxed">
+                       <p className="text-md md:text-body text-slate-800/80 font-body leading-relaxed">
                          {asset.description}
                        </p>
                      </div>

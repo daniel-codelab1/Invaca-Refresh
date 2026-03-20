@@ -2,8 +2,9 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { MapPin, Phone, Mail, Building2 } from 'lucide-react'
+import { getStrapiMedia } from '@/lib/tools'
 
 const departments = [
   {
@@ -36,6 +37,25 @@ const fadeSlideUp = {
 }
 
 export function ContactClient() {
+  const [departmentsList, setDepartmentsList] = useState(departments)
+
+  useEffect(() => {
+    getStrapiMedia('/api/contact?populate=Departaments').then((strapiData) => {
+      if (strapiData?.data?.Departaments) {
+        const mappedDepts = strapiData.data.Departaments.map((dept: any) => ({
+          name: dept.Name || '',
+          phone: dept.PhoneText || null,
+          phoneHref: dept.PhoneLink ? `tel:${dept.PhoneLink}` : null,
+          email: dept.Email || '',
+          emailHref: dept.Email ? `mailto:${dept.Email}` : '',
+        }))
+        if (mappedDepts.length > 0) {
+          setDepartmentsList(mappedDepts)
+        }
+      }
+    }).catch(err => console.error("Error fetching contact data:", err))
+  }, [])
+
   const heroRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -203,9 +223,9 @@ export function ContactClient() {
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {departments.map((dept, i) => (
+              {departmentsList.map((dept, i) => (
                 <motion.div
-                  key={dept.name}
+                  key={dept.name || i}
                   variants={fadeUpVariant}
                   className="bg-white w-full rounded-xs border-b-2 border-dark p-6 group hover:border-accent transition-all duration-300"
                 >

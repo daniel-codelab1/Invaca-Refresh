@@ -5,9 +5,11 @@ import { TickerCard } from '@/components/investors/TickerCard'
 import { FinancialDocList } from '@/components/investors/FinancialDocList'
 import { AssemblyCallList } from '@/components/investors/AssemblyCallList'
 import TradingViewWidget from '@/components/investors/TradingViewWidget'
+import TradingViewWidgetB from '@/components/investors/TradingViewWidgetB'
 import { Building, Phone, Mail, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useState } from 'react'
 
 // Shared Animation Variants
 const staggerContainer = {
@@ -29,6 +31,8 @@ const slideInRight = {
 }
 
 export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: any) {
+  const [activeTab, setActiveTab] = useState<'A' | 'B'>('A');
+
   return (
     <>
       {/* SECTION 1: Market Data (Split-Screen Editorial) */}
@@ -45,10 +49,10 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
                 variants={fadeSlideUp}
               >
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-dark mb-6 leading-[1.1]">
-                  Valor sostenido a través del <span className="text-accent italic">tiempo</span>
+                  Trayectoria en el mercado de <span className="text-accent italic">valores</span>
                 </h2>
                 <p className="text-body lg:text-body-lg text-slate font-body font-light mb-8 max-w-lg">
-                  Nuestra presencia consolidada en la Bolsa de Valores de Caracas refleja décadas de gestión estratégica y crecimiento constante. Monitoree el desempeño en tiempo real de nuestras acciones Clase A y B.
+                  Nuestra trayectoria en el mercado de capitales refleja un compromiso sólido con la rendición de cuentas y la visión de largo plazo. Cotizamos en la Bolsa de Valores de Caracas desde 1955, brindando a nuestros accionistas (IVC.A / IVC.B) acceso a información clara para el seguimiento de su inversión.
                 </p>
                 
                 {/* <div className="bg-white p-8 rounded-sm shadow-xl border border-neutral-100 hover:shadow-2xl transition-shadow duration-500 group relative overflow-hidden">
@@ -67,39 +71,64 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
 
             {/* Right Ticker & Chart */}
             <motion.div 
-              className="w-full lg:w-7/12 space-y-8"
+              className="w-full bg-white z-30 lg:w-7/12 space-y-8"
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
             >
-              <div className="bg-white grid sm:grid-cols-2 gap-6 relative z-10">
+              {/* <div className="bg-white grid sm:grid-cols-2 gap-6 relative z-10">
                 {tickerData.map((ticker: any) => (
                   <motion.div key={ticker.symbol} variants={slideInRight}>
                     <TickerCard {...ticker} />
                   </motion.div>
                 ))}
-              </div>
+              </div> */}
 
               {/* Chart Panoramic */}
-               <motion.div variants={fadeSlideUp} className="bg-white rounded-xs border border-cream-100 h-[500px] flex flex-col relative z-0">
-                  <div className="absolute top-2 md:top-6 left-3 md:left-4 w-10 h-10 md:w-14 md:h-14 rounded-full overflow-hidden bg-slate-900 p-2 flex items-center justify-center z-10">
-                    <Image
-                      src="/logos/LogotipoInvacaNegativo.png"
-                      alt="INVACA Investment Company"
-                      width={160}
-                      height={60}
-                      className="h-12 md:h-12 w-12 md:w-12 object-contain"
-                      priority
-                    />
+               <motion.div variants={fadeSlideUp} className="bg-white rounded-xs border border-cream-100 flex flex-col relative z-0">
+                  <div className="flex bg-gray-100 p-1 rounded-sm mt-0 mb-2 zelf-start w-fit">
+                    <button
+                      onClick={() => setActiveTab('A')}
+                      className={`px-4 py-2 text-sm font-medium rounded-sm transition-all ${
+                        activeTab === 'A' 
+                          ? 'bg-white text-dark shadow-sm' 
+                          : 'text-slate-500 hover:text-dark'
+                      }`}
+                    >
+                      Clase A
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('B')}
+                      className={`px-4 py-2 text-sm font-medium rounded-sm transition-all ${
+                        activeTab === 'B' 
+                          ? 'bg-white text-dark shadow-sm' 
+                          : 'text-slate-500 hover:text-dark'
+                      }`}
+                    >
+                      Clase B
+                    </button>
                   </div>
-                  <div className="absolute top-2 left-14 md:left-20 px-2 py-0 md:py-1 w-10/12 md:w-5/6 bg-white z-10">
-                    <p className='text-body-md md:text-body-lg text-dark font-body font-bold'>
-                      Invaca Investment Company S.A.C.A Class A
-                    </p>
-                  </div>
-                  <div className="flex-1 bg-white flex items-center justify-center relative overflow-hidden rounded-sm">
-                     <TradingViewWidget />
+
+                  <div className="relative h-[500px]">
+                    <div className="absolute top-2 md:top-6 left-3 md:left-4 w-10 h-10 md:w-14 md:h-14 rounded-full overflow-hidden bg-slate-900 p-2 flex items-center justify-center z-30">
+                      <Image
+                        src="/logos/LogotipoInvacaNegativo.png"
+                        alt="INVACA Investment Company"
+                        width={160}
+                        height={60}
+                        className="h-12 md:h-12 w-12 md:w-12 object-contain"
+                        priority
+                      />
+                    </div>
+                    <div className="absolute top-4 left-14 md:left-20 px-2 py-0 md:py-1 w-10/12 md:w-5/6 bg-white z-30">
+                      <p className='text-body-md md:text-body-lg text-dark font-body font-bold'>
+                        Invaca Investment Company S.A.C.A Class {activeTab}
+                      </p>
+                    </div>
+                    <div className="absolute inset-0 bg-white z-10 flex items-center justify-center overflow-hidden rounded-sm">
+                       {activeTab === 'A' ? <TradingViewWidget /> : <TradingViewWidgetB />}
+                    </div>
                   </div>
                </motion.div>
             </motion.div>
@@ -125,7 +154,7 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
               Estados Financieros Consolidados
             </h2>
             <p className="text-body md:text-body-lg text-slate font-body font-light">
-              Respaldamos la confianza de nuestros inversionistas con un reporte riguroso y periódico de nuestra rentabilidad y solidez estructural.
+              Invaca pone a disposición información financiera y reportes institucionales para respaldar la toma de decisiones informada de sus inversionistas y públicos vinculados.
             </p>
           </motion.div>
 
@@ -168,16 +197,16 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
             >
               <div className="mb-12">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-dark mb-4">
-                  Asambleas de Accionistas
+                  Gobierno Corporativo
                 </h2>
                 <p className="text-body md:text-body-lg text-slate font-body font-light">
-                  Participación activa y democrática en las decisiones fundamentales.
+                  Convocatorias, comunicaciones oficiales y documentación de referencia vinculada al gobierno corporativo de Invaca.
                 </p>
               </div>
               
               <motion.div variants={fadeSlideUp} className="bg-white rounded-xs border border-neutral-100 overflow-hidden">
                 <div className="p-2 md:p-8 border-b border-neutral-100 bg-white">
-                   <h3 className="text-2xl font-display font-medium text-dark">Últimas Convocatorias de Asambleas</h3>
+                   <h3 className="text-2xl font-display font-medium text-dark">Convocatorias de Asambleas</h3>
                 </div>
                 <div className="p-2 md:p-8">
                    <AssemblyCallList calls={assemblyCalls} />
@@ -197,7 +226,7 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
                 <div className="bg-[url('/images/assets/bg-ivc-4.jpg')] bg-cover bg-center text-white px-6 md:px-10 py-12 rounded-xs relative overflow-hidden group">
                   
                   <h3 className="text-3xl font-display font-medium mb-4 md:mb-2 relative z-10">Contacto para Inversionistas</h3>
-                  <p className="text-cream-100/70 font-body font-light mb-10 relative z-10">Nuestro equipo de Relaciones con Inversionistas está a su entera disposición.</p>
+                  <p className="text-cream-100/70 font-body font-light mb-10 relative z-10">Canales de atención para consultas relacionadas con información bursátil y reportes institucionales.</p>
                   
                   <div className="space-y-10 relative z-10">
                     <div className="flex items-start group/item">
@@ -205,8 +234,8 @@ export function InvestorHubClient({ tickerData, financialDocs, assemblyCalls }: 
                         <Building className="w-4 h-4 md:w-6 md:h-6" />
                       </div>
                       <div>
-                        <p className="font-body font-semibold text-white tracking-wide uppercase text-xs mb-1">Oficina Principal</p>
-                        <p className="text-cream-100/80 font-body text-body-md leading-relaxed">Av. Francisco de Miranda, Centro Lido, Torre D, Piso 11, Ofic. 114-D. Caracas, Venezuela.</p>
+                        <p className="font-body font-semibold text-white tracking-wide uppercase text-xs mb-1">Dirección de oficinas</p>
+                        <p className="text-cream-100/80 font-body text-body-md leading-relaxed">Av. Venezuela, Torre El Samán, Planta Baja, Urb. El Rosal Caracas, Venezuela</p>
                       </div>
                     </div>
                     

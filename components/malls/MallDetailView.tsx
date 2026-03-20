@@ -4,6 +4,8 @@ import { motion, AnimatePresence, useInView, animate } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowLeft, MapPin, Phone, Mail, Clock, ArrowUpRight, X, ArrowRight, Users, Globe, Calendar, Instagram } from 'lucide-react'
 import { useState, useEffect, useMemo, useRef } from 'react'
+import Lightbox from "yet-another-react-lightbox"
+import "yet-another-react-lightbox/styles.css"
 
 export interface MallData {
   id: number
@@ -40,6 +42,7 @@ export interface MallData {
   gallery: string[]
   contact: {
     phone: string
+    phone2: string
     email: string
     openingHours: string
     website?: string
@@ -218,7 +221,7 @@ function AnimatedBrandGrid({ brands }: { brands: { name: string, image?: string 
 }
 
 export function MallDetailView({ mall }: { mall: MallData }) {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [lightboxIndex, setLightboxIndex] = useState(-1)
 
   return (
     <div className="min-h-screen">
@@ -344,7 +347,6 @@ export function MallDetailView({ mall }: { mall: MallData }) {
                         </div>
                       </div>
                   </div>
-
                   <div className="mt-16 h-72 w-full rounded-sm overflow-hidden">
                      <iframe 
                        src={mall.mapEmbedUrl} 
@@ -388,7 +390,7 @@ export function MallDetailView({ mall }: { mall: MallData }) {
                     
                     <div className="mt-8 pt-8 border-t border-cream-200">
                         <div className="flex flex-col justify-center items-start space-y-5">
-                            <a href={`tel:${mall.contact.phone}`} className="flex items-center text-dark hover:text-accent transition-colors font-medium">
+                            <a href={`tel:${mall.contact.phone2}`} className="flex items-center text-dark hover:text-accent transition-colors font-medium">
                                 <Phone className="h-5 w-5 mr-3" />
                                 {mall.contact.phone}
                             </a>
@@ -524,16 +526,16 @@ export function MallDetailView({ mall }: { mall: MallData }) {
                </div>
             </FadeIn> */}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-auto md:h-[500px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-auto md:h-[680px]">
                {mall.gallery.map((img, idx) => (
                   <FadeIn 
                     key={idx} 
                     delay={idx * 0.1}
                     className={`relative overflow-hidden rounded-sm group cursor-pointer ${
-                      idx === 0 ? 'md:col-span-2 md:row-span-2 h-[300px] md:h-full' : 'h-[240px] md:h-full'
+                      idx === 0 ? 'md:col-span-2 md:row-span-2 h-[400px] md:h-full' : 'h-[340px] md:h-full'
                     }`}
                   >
-                     <div onClick={() => setSelectedImage(img)} className="w-full h-full relative">
+                     <div onClick={() => setLightboxIndex(idx)} className="w-full h-full relative text-dark">
                        <img 
                           src={img} 
                           alt={`${mall.name} gallery ${idx + 1}`} 
@@ -551,37 +553,12 @@ export function MallDetailView({ mall }: { mall: MallData }) {
       </section>
 
       {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm"
-            onClick={() => setSelectedImage(null)}
-          >
-            <button 
-              className="absolute top-6 right-6 text-white hover:text-accent transition-colors z-[101]"
-              onClick={() => setSelectedImage(null)}
-            >
-              <X className="h-10 w-10" />
-            </button>
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-7xl h-auto max-h-[90vh] aspect-video rounded-sm overflow-hidden shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-               <img 
-                 src={selectedImage} 
-                 alt="Gallery Fullscreen" 
-                 className="object-contain w-full h-full" 
-               />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Lightbox
+        open={lightboxIndex >= 0}
+        index={lightboxIndex >= 0 ? lightboxIndex : 0}
+        close={() => setLightboxIndex(-1)}
+        slides={mall.gallery.map(src => ({ src }))}
+      />
     </div>
   )
 }

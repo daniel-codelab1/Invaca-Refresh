@@ -16,7 +16,7 @@ export default function CentrosComercialesPage() {
         imageAlt="Invaca Centros Comerciales Background"
         badgeText="Destinos Comerciales"
         title="Centros Comerciales"
-        subtitle="Operamos los destinos comerciales más emblemáticos de Venezuela."
+        subtitle="Espacios premium donde el estilo y las tendencias marcan la experiencia del visitante."
       />
 
       {/* 2. Interactive Client Experience (Discovery, Interactive Grid, Commercial Leasing) */}

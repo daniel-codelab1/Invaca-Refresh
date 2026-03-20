@@ -38,8 +38,9 @@ export function CompanyIntro() {
             Un Siglo de Trayectoria Empresarial en Venezuela
           </h2>
           
-          <p className="text-md md:text-body-md text-slate-300 font-body leading-relaxed mb-10 max-w-lg">
-            <strong>Invaca Investment Company</strong> es una empresa inmobiliaria y financiera con 100 años de actividad ininterrumpida. Fundada en 1925 por los socios de C.A. Cervecería Caracas (más tarde Cervecería Polar), hemos sido protagonistas del desarrollo urbano y empresarial de Venezuela.
+          <p className="text-md md:text-body-md text-slate-200 font-body leading-relaxed mb-10 max-w-lg">
+            Desde nuestra fundación en 1925, en <strong>Invaca Investment Company</strong> hemos evolucionado para consolidar un modelo de inversión inmobiliaria transparente, profesional y responsable. 
+            Nuestra presencia bursátil guía un camino de crecimiento constante, donde la mejora de cada activo convierte nuestra visión de futuro en resultados tangibles para nuestros aliados comerciales e inversionistas.
           </p>
           
           <div>
